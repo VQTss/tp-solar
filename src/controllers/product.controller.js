@@ -17,7 +17,9 @@ const productController = {
     getProductById: async (req, res, next) => {
         const {product_id} = req.body;
         if (!product_id) {
-            throw new BadRequestError("Error: Product id is not in body");
+            res.json({
+                "message" : "Product id is not in body "
+            });
         }
         const data = await productServices.getProductById(product_id);
         new SuccessResponse
@@ -32,7 +34,9 @@ const productController = {
     getProductByCategory: async (req, res, next) => {
         const {category_id} = req.body;
         if (!category_id) {
-            throw new BadRequestError("Error: Category id is not in body");
+            res.json({
+                "message" : "Category id is not in body "
+            });
         }
         const data = await productServices.getProductByCategory(category_id);
         new SuccessResponse
@@ -47,22 +51,34 @@ const productController = {
     createProduct: async (req, res, next) => {
         const {product_id, product_name, product_price, product_discount, flash_sale ,category_id} = req.body;
         if(!product_id){
-            throw new BadRequestError("Error: Product id is not in body");
+            res.json({
+                "message" : "Product id is not in body "
+            })
         }
         if(!product_name){
-            throw new BadRequestError("Error: Product name is not in body");
+            res.json({
+                "message" : "Product name is not in body "
+            }); 
         }
         if(!product_price){
-            throw new BadRequestError("Error: Product price is not in body");
+            res.json({
+                "message" : "Product price is not in body "
+            });
         }
         if(product_discount < 0){
-            throw new BadRequestError("Error: Product discount cannot be negative");
+            res.json({
+                "message" : "Product discount is cannot be negative "
+            });
         }
         if(flash_sale == null){
-            throw new BadRequestError("Error: Flash sale is not in body");
+            res.json({
+                "message" : "Flash sale is not in body "
+            });
         }
         if(!category_id){
-            throw new BadRequestError("Error: Category id is not in body");
+            res.json({
+                "message" : "Category id is not in body "
+            });
         }
         const data = await productServices.createProduct(product_id, product_name, product_price, product_discount, flash_sale ,category_id);
         
@@ -78,22 +94,34 @@ const productController = {
     updateProduct: async (req, res, next) => {
         const {product_id, product_name, product_price, product_discount, flash_sale ,category_id} = req.body;
         if(!product_id){
-            throw new BadRequestError("Error: Product id is not in body");
+            res.json({
+                "message" : "Product id is not in body "
+            });
         }
         if(!product_name){
-            throw new BadRequestError("Error: Product name is not in body");
+            res.json({
+                "message" : "Product name is not in body "
+            }); 
         }
         if(!product_price){
-            throw new BadRequestError("Error: Product price is not in body");
+            res.json({
+                "message" : "Product price is not in body "
+            });
         }
-        if(!product_discount){
-            throw new BadRequestError("Error: Product discount is not in body");
+        if(product_discount < 0){
+            res.json({
+                "message" : "Product discount is not in body "
+            });
         }
-        if(!flash_sale){
-            throw new BadRequestError("Error: Flash sale is not in body");
+        if(flash_sale == null){
+            res.json({
+                "message" : "Flash sale is not in body "
+            });
         }
         if(!category_id){
-            throw new BadRequestError("Error: Category id is not in body");
+            res.json({
+                "message" : "Category id is not in body "
+            });
         }
         const data = await productServices.updateProduct(product_id, product_name, product_price, product_discount, flash_sale ,category_id);
         
@@ -109,7 +137,9 @@ const productController = {
     deleteProduct: async (req, res, next) => {
         const {product_id} = req.body;
         if (!product_id) {
-            throw new BadRequestError("Error: Product id is not in body");
+            res.json({
+                "message" : "Product id is not in body "
+            });
         }
         const data = await productServices.deleteProduct(product_id);
         new SuccessResponse

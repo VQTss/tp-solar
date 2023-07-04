@@ -20,6 +20,11 @@ const UserControllers = {
     getUserById: async (req, res,next) => {
         try {
             const { id } = req.body;
+            if (!id) {
+                res.json({
+                    "message" : "id is not in body"
+                });
+            }
             const data = await UserServices.getUserById(id);
             new SuccessResponse({
                 metadata: data,
@@ -33,6 +38,21 @@ const UserControllers = {
     updateUser: async (req, res,next) => {
         try {
             const { id, full_name, phone, address } = req.body;
+            if (!id) {
+                res.json({
+                    "message" : "id is not in body"
+                });
+            }
+            if (!full_name) {
+                res.json({
+                    "message" : "full_name is not in body"
+                });
+            }
+            if (!phone) {
+                res.json({
+                    "message" : "phone is not in body"
+                });
+            }
             const data = await UserServices.updateUser(id, full_name, phone, address);
             new SuccessResponse({
                 metadata: data,

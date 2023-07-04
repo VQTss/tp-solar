@@ -8,6 +8,11 @@ const CartController = {
     getCartByUserId: async (req, res,next) => {
         try {
             const { id } = req.body;
+            if (!id) {
+                res.json({
+                    "message" : "id is not in body"
+                });
+            }
             const data = await cartServices.getCartByUserId(id);
             new SuccessResponse({
                 message : "Get cart by user id successfully",
@@ -21,6 +26,21 @@ const CartController = {
 
     addCart: async (req, res,next) => {
         const { product_id, quantity, user_id } = req.body;
+        if (!product_id) {
+            res.json({
+                "message" : "Product id is not in body"
+            });
+        }
+        if (!quantity) {
+            res.json({
+                "message" : "Quantity is not in body"
+            });
+        }
+        if (!user_id) {
+            res.json({
+                "message" : "User id is not in body"
+            });
+        }
         try {
             const data = await cartServices.addCart(product_id, quantity, user_id);
             new SuccessResponse({
@@ -35,6 +55,11 @@ const CartController = {
     // [PUT] 
     updateCart: async (req, res,next) => {
         const { id } = req.body;
+        if (!id) {
+            res.json({
+                "message" : "id is not in body"
+            });
+        }
         const { quantity } = req.body;
         try {
             const data = await cartServices.updateCart(id, quantity);
@@ -51,6 +76,11 @@ const CartController = {
 
     deleteCart: async (req, res,next) => {
         const { id } = req.body;
+        if (!id) {
+            res.json({
+                "message" : "id is not in body"
+            });
+        }
         try {
             const data = await cartServices.deleteCart(id);
             new SuccessResponse({

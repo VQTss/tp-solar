@@ -18,6 +18,11 @@ const AccountController = {
     getAccountsById : async (req,res,next) => {
         try {
             const { id } = req.body;
+            if (!id) {
+                res.json({
+                    "message" : "id is not in body"
+                });
+            }
             const account = await AccountsService.getAccountsById(id);
             new SuccessResponse({
                 metadata: account,
@@ -30,6 +35,11 @@ const AccountController = {
     deleteAccount : async (req,res,next) => {
         try {
             const { id } = req.body;
+            if (!id) {
+                res.json({
+                    "message" : "id is not in body"
+                });
+            }
             const data = await AccountsService.deleteAccount(id);
             new SuccessResponse({
                message : 'delete account successfully',

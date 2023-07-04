@@ -13,13 +13,19 @@ const mainPageControllers = {
     createImageSlider : (req,res) => {
         const {slider_name , slider_image , slider_status} = req.body;
         if (!slider_name) {
-            throw new BadRequestError("Slider name cannot be exist");
+            res.json({
+                message: "Slider name cannot be exist",
+            });
         }
         if (!slider_image) {
-            throw new BadRequestError("Slider image cannot be exist");
+           res.json({
+                message: "Slider image cannot be exist",
+           });
         }
         if (!slider_status) {
-            throw new BadRequestError("Slider status cannot be exist");
+            res.json({
+                message: "Slider status cannot be exist",
+            });
         }
         const data = mainPageServices.createImageSlider(slider_name,slider_image,slider_status);
         new SuccessResponse({
@@ -30,16 +36,24 @@ const mainPageControllers = {
     updateImageSlider : (req,res) => {
         const {slider_id, image_name , image_base64 , product_id} = req.body;
         if (!slider_id) {
-            throw new BadRequestError("Slider id cannot be exist");
+            res.json({
+                message: "Slider id cannot be exist",
+            });
         }
         if (!image_name) {
-            throw new BadRequestError("Image name cannot be exist");
+            res.json({
+                message: "Image name cannot be exist",
+            });
         }
         if (!image_base64) {
-            throw new BadRequestError("Image base64 cannot be exist");
+            res.json({
+                message: "Image base64 cannot be exist",
+            });
         }
         if (!product_id) {
-            throw new BadRequestError("Product id cannot be exist");
+            res.json({
+                message: "Product id cannot be exist",
+            });
         }
         const data = mainPageServices.updateImageSlider(slider_id,image_name,image_base64,product_id);
         new SuccessResponse({
@@ -51,7 +65,9 @@ const mainPageControllers = {
     deleteImageSlider : (req,res) => {
         const {slider_id} = req.body;
         if (!slider_id) {
-            throw new BadRequestError("Slider id cannot be exist");
+            res.json({
+                message: "Slider id cannot be exist",
+            });
         }
         const data = mainPageServices.deleteImageSlider(slider_id);
         new SuccessResponse({

@@ -5,7 +5,9 @@ const imageProductController = {
     getImageProduct: async (req, res) => {
         const { product_id } = req.body;
         if (!product_id) {
-            throw new BadRequestError("Error: Product id is not in body");
+            res.json({
+                message: "Product id is not in body",
+            });
         }
         const data = await imageProductServices.getImageProduct(product_id);
         new SuccessResponse({
@@ -16,13 +18,19 @@ const imageProductController = {
     createImageProduct: async (req, res) => {
         const { product_id, image_base64, image_name } = req.body;
         if (!product_id) {
-            throw new BadRequestError("Error: Product id is not in body");
+            res.json({
+                message: "Product id is not in body",
+            });
         }
         if (!image_base64) {
-            throw new BadRequestError("Error: Image base64 is not in body");
+            res.json({
+                message: "Image base64 is not in body",
+            });
         }
         if (!image_name) {
-            throw new BadRequestError("Error: Product name is not in body");
+            res.json({
+                message: "Product name is not in body",
+            });
         }
         const data = await imageProductServices.createImageProduct(product_id, image_base64, image_name);
         new SuccessResponse({
@@ -33,13 +41,19 @@ const imageProductController = {
     updateImageProduct: async (req, res) => {
         const { product_id, image_base64, image_name } = req.body;
         if (!product_id) {
-            throw new BadRequestError("Error: Product id is not in body");
+            res.json({
+                message: "Product id is not in body",
+            });
         }
         if (!image_base64) {
-            throw new BadRequestError("Error: Image base64 is not in body");
+            res.json({
+                message: "Image base64 is not in body",
+            });
         }
         if (!image_name) {
-            throw new BadRequestError("Error: Product name is not in body");
+            res.json({
+                message: "Product name is not in body",
+            });
         }
         const data = await imageProductServices.updateImageProduct(product_id, image_base64, image_name);
         new SuccessResponse({
@@ -50,7 +64,9 @@ const imageProductController = {
     deleteImageProduct: async (req, res) => {
         const { product_id } = req.body;
         if (!product_id) {
-            throw new BadRequestError("Error: Product id is not in body");
+            res.json({
+                message: "Product id is not in body",
+            });
         }
         const data = await imageProductServices.deleteImageProduct(product_id);
         new SuccessResponse({

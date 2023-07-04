@@ -6,7 +6,9 @@ const descProductsController = {
     getDescProductsByID: async (req, res) => {
         const { product_id } = req.body;
         if (!product_id) {
-            throw new BadRequestError("Error: Product id is not in body");
+            res.json({
+                message: "Product id is not in body",
+            });
         }
         const data = await descProductsServices.getDescProductsByID(product_id);
         new SuccessResponse({
@@ -17,10 +19,14 @@ const descProductsController = {
     createDescProduct: async (req, res) => {
         const { product_id, description } = req.body;
         if (!product_id) {
-            throw new BadRequestError("Error: Product id is not in body");
+            res.json({
+                message: "Product id is not in body",
+            });
         }
         if (!description) {
-            throw new BadRequestError("Error: Description is not in body");
+            res.json({
+                message: "Description is not in body",
+            });
         }
         const data = await descProductsServices.createDescProduct(product_id, description);
         new SuccessResponse({
@@ -31,10 +37,14 @@ const descProductsController = {
     updateDescProduct: async (req, res) => {
         const { product_id, description } = req.body;
         if (!product_id) {
-            throw new BadRequestError("Error: Product id is not in body");
+            res.json({
+                message: "Product id is not in body",
+            });
         }
         if (!description) {
-            throw new BadRequestError("Error: Description is not in body");
+            res.json({
+                message: "Description is not in body",
+            });
         }
         const data = await descProductsServices.updateDescProduct(product_id, description);
         new SuccessResponse({
@@ -45,7 +55,9 @@ const descProductsController = {
     deleteDescProduct: async (req, res) => {
         const { product_id } = req.body;
         if (!product_id) {
-            throw new BadRequestError("Error: Product id is not in body");
+            res.json({
+                message: "Product id is not in body",
+            });
         }
         const data = await descProductsServices.deleteDescProduct(product_id);
         new SuccessResponse({

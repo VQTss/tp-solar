@@ -6,7 +6,6 @@ const categoriesController = {
 
     // get all categories
     getCategories: async (req, res, next) => {
-        console.log("get categories");
         const data = await categoriesServices.getAllCategories();
         new SuccessResponse({
             message: "Get categories successfully",
@@ -19,7 +18,9 @@ const categoriesController = {
     createCategory: async (req, res, next) => {
         const{category_name} = req.body;
         if (!category_name) {
-            throw new BadRequestError("Error: Category name is not in body");
+            res.json({
+                "message" : "Category name is not in body "
+            });
         }
         const data = await categoriesServices.createCategory(category_name);
         new CREATED({
@@ -32,10 +33,14 @@ const categoriesController = {
     updateCategories : async (req, res, next) => {
         const {category_id, category_name} = req.body;
         if (!category_id) {
-            throw new BadRequestError("Error: Category id is not in body");
+            res.json({
+                "message" : "Category id is not in body "
+            });
         }
         if (!category_name) {
-            throw new BadRequestError("Error: Category name is not in body");
+            res.json({
+                "message" : "Category name is not in body "
+            });
         }
         const data = await categoriesServices.updateCategories(category_id, category_name);
         new CREATED({
@@ -48,7 +53,9 @@ const categoriesController = {
     deleteCategories : async (req, res, next) => {
         const {category_id} = req.body;
         if (!category_id) {
-            throw new BadRequestError("Error: Category id is not in body");
+            res.json({
+                "message" : "Category id is not in body "
+            });
         }
         const data = await categoriesServices.deleteCategories(category_id);
         new CREATED({

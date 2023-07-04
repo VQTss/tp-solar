@@ -5,6 +5,11 @@ const AccessServices = require("../services/access.services");
 const AccessToken = {
     login: async (req, res, next) => {
         const { username, password } = req.body;
+        if (!username || !password) {
+            res.json({
+                "message": "Username or password is not in body"
+            });
+        }
         const user = await AccessServices.login(username, password);
         // set cookie
         res.cookie("refreshToken", user.refreshToken, {
@@ -19,7 +24,17 @@ const AccessToken = {
     },
     register: async (req, res, next) => {
         const { username, email, password , inforUser } = req.body;
-        
+        if (!username || !email || !password) {
+            res.json({
+                "message": "Username or email or password is not in body"
+            });
+        }
+
+        if (!inforUser) {
+            res.json({
+                "message": "InforUser is not in body"
+            })
+        }
         const account = await AccessServices.registerUser(username, email, password, inforUser);
         
         new SuccessResponse({

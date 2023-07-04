@@ -10,6 +10,26 @@ const PaymentController = {
     // create payment
     createPayment: async (req, res, next) => {
         const { payment_method, payment_status, order_id, user_id } = req.body;
+        if (!payment_method) {
+            res.json({
+                message: "Payment method cannot be exist",
+            });
+        }
+        if (payment_status == null) {
+            res.json({
+                message: "Payment status cannot be exist",
+            });
+        }
+        if (!order_id) {
+            res.json({
+                message: "Order id cannot be exist",
+            });
+        }
+        if (!user_id) {
+            res.json({
+                message: "User id cannot be exist",
+            });
+        }
         const payment = await PaymentServices.addPayment(payment_method, payment_status, order_id , user_id);
         new SuccessResponse({
             metadata: payment,
@@ -29,6 +49,11 @@ const PaymentController = {
     // get payment by user id
     getPaymentByUserID: async (req, res, next) => {
         const { user_id } = req.body;
+        if (!user_id) {
+            res.json({
+                message: "User id cannot be exist",
+            });
+        }
         const payments = await PaymentServices.getPaymentByUserID(user_id);
         new SuccessResponse({
             metadata: payments,
