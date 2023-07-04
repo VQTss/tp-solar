@@ -6,42 +6,42 @@ const OrderController = {
     addOrder: (req, res, next) => {
         const { user_id, order_total, order_status, product_id, quantity, phone, email, address } = req.body;
         if (!user_id) {
-            res.json({
+            return   res.json({
                 message: "User id cannot be exist",
             });
         }
         if (!order_total) {
-            res.json({
+            return   res.json({
                 message: "Order total cannot be exist",
             });
         }
         if (order_status == null) {
-            res.json({
+            return    res.json({
                 message: "Order status cannot be exist",
             });
         }
         if (!product_id) {
-            res.json({
+            return   res.json({
                 message: "Product id cannot be exist",
             });
         }
         if (!quantity) {
-            res.json({
+            return  res.json({
                 message: "Quantity cannot be exist",
             });
         }
         if (!phone) {
-            res.json({
+            return   res.json({
                 message: "Phone cannot be exist",
             });
         }
         if (!email) {
-            res.json({
+            return    res.json({
                 message: "Email cannot be exist",
             });
         }
         if (!address) {
-            res.json({
+            return   res.json({
                 message: "Address cannot be exist",
             });
         }
@@ -55,42 +55,42 @@ const OrderController = {
         const { order_id, order_total, order_status, product_id, quantity, phone, email, address } = req.body;
 
         if (!user_id) {
-            res.json({
+            return   res.json({
                 message: "User id cannot be exist",
             });
         }
         if (!order_total) {
-            res.json({
+            return    res.json({
                 message: "Order total cannot be exist",
             });
         }
         if (order_status == null) {
-            res.json({
+            return   res.json({
                 message: "Order status cannot be exist",
             });
         }
         if (!product_id) {
-            res.json({
+            return   res.json({
                 message: "Product id cannot be exist",
             });
         }
         if (!quantity) {
-            res.json({
+            return    res.json({
                 message: "Quantity cannot be exist",
             });
         }
         if (!phone) {
-            res.json({
+            return    res.json({
                 message: "Phone cannot be exist",
             });
         }
         if (!email) {
-            res.json({
+            return   res.json({
                 message: "Email cannot be exist",
             });
         }
         if (!address) {
-            res.json({
+            return   res.json({
                 message: "Address cannot be exist",
             });
         }    
@@ -104,7 +104,7 @@ const OrderController = {
     deleteOrder: (req, res, next) => {
         const { order_id } = req.body;
         if (!order_id) {
-            res.json({
+            return  res.json({
                 message: "Order id cannot be exist",
             });
         }
@@ -117,7 +117,7 @@ const OrderController = {
     getOrder: (req, res, next) => {
         const { order_id } = req.body;
         if (!order_id) {
-            res.json({
+            return  res.json({
                 message: "Order id cannot be exist",
             });
         }
@@ -131,12 +131,12 @@ const OrderController = {
         const { order_id, user_id } = req.body;
 
         if (!order_id) {
-            res.json({
+            return    res.json({
                 message: "Order id cannot be exist",
             });
         }
         if (!user_id) {
-            res.json({
+            return    res.json({
                 message: "User id cannot be exist",
             });
         }
@@ -149,7 +149,7 @@ const OrderController = {
     getOrderDetails: (req, res, next) => {
         const { order_details_id } = req.body;
         if (!order_details_id) {
-            res.json({
+            return   res.json({
                 message: "Order details id cannot be exist",
             });
         }
@@ -163,7 +163,7 @@ const OrderController = {
     getOrderByUserId: async (req, res, next) => {
         const { user_id } = req.body;
         if (!user_id) {
-            res.json({
+            return   res.json({
                 message: "Order id cannot be exist",
             });
         }

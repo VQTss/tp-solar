@@ -21,7 +21,7 @@ const UserControllers = {
         try {
             const { id } = req.body;
             if (!id) {
-                res.json({
+                return     res.json({
                     "message" : "id is not in body"
                 });
             }
@@ -39,17 +39,17 @@ const UserControllers = {
         try {
             const { id, full_name, phone, address } = req.body;
             if (!id) {
-                res.json({
+                return       res.json({
                     "message" : "id is not in body"
                 });
             }
             if (!full_name) {
-                res.json({
+                return    res.json({
                     "message" : "full_name is not in body"
                 });
             }
             if (!phone) {
-                res.json({
+                return    res.json({
                     "message" : "phone is not in body"
                 });
             }

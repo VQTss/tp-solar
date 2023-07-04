@@ -1,71 +1,72 @@
 const { BadRequestError } = require("../core/error.response");
 const cartServices = require("../services/cart.services");
-const {SuccessResponse} =  require('../core/success.response');
+const { SuccessResponse } = require('../core/success.response');
 
 const CartController = {
 
     // [GET] /cart
-    getCartByUserId: async (req, res,next) => {
+    getCartByUserId: async (req, res, next) => {
         try {
             const { id } = req.body;
             if (!id) {
                 res.json({
-                    "message" : "id is not in body"
+                    "message": "id is not in body"
                 });
+            } else {
+                const data = await cartServices.getCartByUserId(id);
+                new SuccessResponse({
+                    message: "Get cart by user id successfully",
+                    metadata: data
+                }).send(res);
             }
-            const data = await cartServices.getCartByUserId(id);
-            new SuccessResponse({
-                message : "Get cart by user id successfully",
-                metadata : data
-            }).send(res);
         } catch (error) {
             throw new BadRequestError(error.message);
         }
     },
     // [POST] /cart
 
-    addCart: async (req, res,next) => {
+    addCart: async (req, res, next) => {
         const { product_id, quantity, user_id } = req.body;
         if (!product_id) {
-            res.json({
-                "message" : "Product id is not in body"
+            return res.json({
+                "message": "Product id is not in body"
             });
         }
         if (!quantity) {
-            res.json({
-                "message" : "Quantity is not in body"
+            return res.json({
+                "message": "Quantity is not in body"
             });
         }
         if (!user_id) {
-            res.json({
-                "message" : "User id is not in body"
+            return res.json({
+                "message": "User id is not in body"
             });
         }
         try {
             const data = await cartServices.addCart(product_id, quantity, user_id);
             new SuccessResponse({
-                message : "Add cart successfully",
-                metadata : data
+                message: "Add cart successfully",
+                metadata: data
             }).send(res);
-        }catch (error) {
+        } catch (error) {
             throw new BadRequestError(error.message);
         }
     },
 
     // [PUT] 
-    updateCart: async (req, res,next) => {
+    updateCart: async (req, res, next) => {
         const { id } = req.body;
         if (!id) {
-            res.json({
-                "message" : "id is not in body"
+            return res.json({
+                "message": "id is not in body"
             });
         }
         const { quantity } = req.body;
         try {
             const data = await cartServices.updateCart(id, quantity);
             new SuccessResponse({
-                message : "Update cart successfully",
-                metadata : data
+                message: "Update cart successfully",
+                metadata: data
             }).send(res);
         } catch (error) {
             throw new BadRequestError(error.message);
@@ -74,18 +75,18 @@ const CartController = {
 
     // [DELETE]
 
-    deleteCart: async (req, res,next) => {
+    deleteCart: async (req, res, next) => {
         const { id } = req.body;
         if (!id) {
-            res.json({
-                "message" : "id is not in body"
+            return res.json({
+                "message": "id is not in body"
             });
         }
         try {
             const data = await cartServices.deleteCart(id);
             new SuccessResponse({
-                message : "Delete cart successfully",
-                metadata : data
+                message: "Delete cart successfully",
+                metadata: data
             }).send(res);
         } catch (error) {
             throw new BadRequestError(error.message);

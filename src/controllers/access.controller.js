@@ -9,18 +9,20 @@ const AccessToken = {
             res.json({
                 "message": "Username or password is not in body"
             });
+        }else{
+            const user = await AccessServices.login(username, password);
+            // set cookie
+            res.cookie("refreshToken", user.refreshToken, {
+                httpOnly: true,
+                secure: false,
+                sameSite: "strict"
+            })
+            new SuccessResponse({
+                message: "Login success",
+                metadata: user
+            }).send(res);
         }
-        const user = await AccessServices.login(username, password);
-        // set cookie
-        res.cookie("refreshToken", user.refreshToken, {
-            httpOnly: true,
-            secure: false,
-            sameSite: "strict"
-        })
-        new SuccessResponse({
-            message: "Login success",
-            metadata: user
-        }).send(res);
+       
     },
     register: async (req, res, next) => {
         const { username, email, password , inforUser } = req.body;
@@ -34,13 +36,14 @@ const AccessToken = {
             res.json({
                 "message": "InforUser is not in body"
             })
+        }else{
+            const account = await AccessServices.registerUser(username, email, password, inforUser);
+            new SuccessResponse({
+                message: "Register success",
+                metadata: account
+            }).send(res);
         }
-        const account = await AccessServices.registerUser(username, email, password, inforUser);
-        
-        new SuccessResponse({
-            message: "Register success",
-            metadata: account
-        }).send(res);
+
     },
     logout: async (req, res, next) => {
         const refreshToken = req.cookies.refreshToken;

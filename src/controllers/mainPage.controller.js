@@ -13,17 +13,17 @@ const mainPageControllers = {
     createImageSlider : (req,res) => {
         const {slider_name , slider_image , slider_status} = req.body;
         if (!slider_name) {
-            res.json({
+            return   res.json({
                 message: "Slider name cannot be exist",
             });
         }
         if (!slider_image) {
-           res.json({
+            return   res.json({
                 message: "Slider image cannot be exist",
            });
         }
         if (!slider_status) {
-            res.json({
+            return    res.json({
                 message: "Slider status cannot be exist",
             });
         }
@@ -36,22 +36,22 @@ const mainPageControllers = {
     updateImageSlider : (req,res) => {
         const {slider_id, image_name , image_base64 , product_id} = req.body;
         if (!slider_id) {
-            res.json({
+            return    res.json({
                 message: "Slider id cannot be exist",
             });
         }
         if (!image_name) {
-            res.json({
+            return    res.json({
                 message: "Image name cannot be exist",
             });
         }
         if (!image_base64) {
-            res.json({
+            return     res.json({
                 message: "Image base64 cannot be exist",
             });
         }
         if (!product_id) {
-            res.json({
+            return   res.json({
                 message: "Product id cannot be exist",
             });
         }
@@ -65,7 +65,7 @@ const mainPageControllers = {
     deleteImageSlider : (req,res) => {
         const {slider_id} = req.body;
         if (!slider_id) {
-            res.json({
+            return    res.json({
                 message: "Slider id cannot be exist",
             });
         }

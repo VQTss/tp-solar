@@ -5,7 +5,7 @@ const imageProductController = {
     getImageProduct: async (req, res) => {
         const { product_id } = req.body;
         if (!product_id) {
-            res.json({
+          return  res.json({
                 message: "Product id is not in body",
             });
         }
@@ -18,17 +18,17 @@ const imageProductController = {
     createImageProduct: async (req, res) => {
         const { product_id, image_base64, image_name } = req.body;
         if (!product_id) {
-            res.json({
+          return  res.json({
                 message: "Product id is not in body",
             });
         }
         if (!image_base64) {
-            res.json({
+         return   res.json({
                 message: "Image base64 is not in body",
             });
         }
         if (!image_name) {
-            res.json({
+            return  res.json({
                 message: "Product name is not in body",
             });
         }
@@ -41,17 +41,17 @@ const imageProductController = {
     updateImageProduct: async (req, res) => {
         const { product_id, image_base64, image_name } = req.body;
         if (!product_id) {
-            res.json({
+            return   res.json({
                 message: "Product id is not in body",
             });
         }
         if (!image_base64) {
-            res.json({
+            return    res.json({
                 message: "Image base64 is not in body",
             });
         }
         if (!image_name) {
-            res.json({
+            return    res.json({
                 message: "Product name is not in body",
             });
         }
@@ -64,7 +64,7 @@ const imageProductController = {
     deleteImageProduct: async (req, res) => {
         const { product_id } = req.body;
         if (!product_id) {
-            res.json({
+            return    res.json({
                 message: "Product id is not in body",
             });
         }

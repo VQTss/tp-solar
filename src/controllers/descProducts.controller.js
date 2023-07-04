@@ -6,7 +6,7 @@ const descProductsController = {
     getDescProductsByID: async (req, res) => {
         const { product_id } = req.body;
         if (!product_id) {
-            res.json({
+            return res.json({
                 message: "Product id is not in body",
             });
         }
@@ -19,12 +19,12 @@ const descProductsController = {
     createDescProduct: async (req, res) => {
         const { product_id, description } = req.body;
         if (!product_id) {
-            res.json({
+            return res.json({
                 message: "Product id is not in body",
             });
         }
         if (!description) {
-            res.json({
+            return res.json({
                 message: "Description is not in body",
             });
         }
@@ -37,12 +37,12 @@ const descProductsController = {
     updateDescProduct: async (req, res) => {
         const { product_id, description } = req.body;
         if (!product_id) {
-            res.json({
+            return res.json({
                 message: "Product id is not in body",
             });
         }
         if (!description) {
-            res.json({
+            return res.json({
                 message: "Description is not in body",
             });
         }
@@ -55,7 +55,7 @@ const descProductsController = {
     deleteDescProduct: async (req, res) => {
         const { product_id } = req.body;
         if (!product_id) {
-            res.json({
+            return res.json({
                 message: "Product id is not in body",
             });
         }
