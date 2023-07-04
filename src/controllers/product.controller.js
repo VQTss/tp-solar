@@ -56,7 +56,7 @@ const productController = {
             throw new BadRequestError("Error: Product price is not in body");
         }
         if(product_discount < 0){
-            throw new BadRequestError("Error: Product discount is not in body");
+            throw new BadRequestError("Error: Product discount cannot be negative");
         }
         if(flash_sale == null){
             throw new BadRequestError("Error: Flash sale is not in body");
