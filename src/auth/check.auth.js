@@ -1,8 +1,7 @@
-const { HEADER} = require("../utils/constants");
+const { HEADER} = require("./../utils/constants/index");
 const { BadRequestError } = require("../core/error.response");
 
 const apiKey = async (req, res, next) => {
-
     const appKey = req.headers[HEADER.API_KEY]?.toString();
     const appID = req.headers[HEADER.API_ID]?.toString();
     if (!appKey) {

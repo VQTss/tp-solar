@@ -46,7 +46,6 @@ const productController = {
     },
     createProduct: async (req, res, next) => {
         const {product_id, product_name, product_price, product_discount, flash_sale ,category_id} = req.body;
-        console.log("body: ", flash_sale);
         if(!product_id){
             throw new BadRequestError("Error: Product id is not in body");
         }
@@ -56,7 +55,7 @@ const productController = {
         if(!product_price){
             throw new BadRequestError("Error: Product price is not in body");
         }
-        if(!product_discount){
+        if(product_discount < 0){
             throw new BadRequestError("Error: Product discount is not in body");
         }
         if(flash_sale == null){
