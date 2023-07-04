@@ -5,7 +5,7 @@ const UserServices = require("../services/user.services");
 
 const UserControllers = {
     // Get all users
-    getAllUsers: async (req, res,next) => {
+    getAllUsers: async (req, res, next) => {
         try {
             const data = await UserServices.getUser();
             new SuccessResponse({
@@ -17,12 +17,12 @@ const UserControllers = {
         }
     },
     // Get user by id
-    getUserById: async (req, res,next) => {
+    getUserById: async (req, res, next) => {
         try {
             const { id } = req.body;
             if (!id) {
-                return     res.json({
-                    "message" : "id is not in body"
+                return res.status(400).json({
+                    "message": "id is not in body"
                 });
             }
             const data = await UserServices.getUserById(id);
@@ -35,22 +35,22 @@ const UserControllers = {
         }
     },
     // Update user
-    updateUser: async (req, res,next) => {
+    updateUser: async (req, res, next) => {
         try {
             const { id, full_name, phone, address } = req.body;
             if (!id) {
-                return       res.json({
-                    "message" : "id is not in body"
+                return res.status(400).json({
+                    "message": "id is not in body"
                 });
             }
             if (!full_name) {
-                return    res.json({
-                    "message" : "full_name is not in body"
+                return res.status(400).json({
+                    "message": "full_name is not in body"
                 });
             }
             if (!phone) {
-                return    res.json({
-                    "message" : "phone is not in body"
+                return res.status(400).json({
+                    "message": "phone is not in body"
                 });
             }
             const data = await UserServices.updateUser(id, full_name, phone, address);

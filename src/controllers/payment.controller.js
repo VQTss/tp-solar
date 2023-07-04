@@ -11,22 +11,22 @@ const PaymentController = {
     createPayment: async (req, res, next) => {
         const { payment_method, payment_status, order_id, user_id } = req.body;
         if (!payment_method) {
-            return   res.json({
+            return   res.status(400).json({
                 message: "Payment method cannot be exist",
             });
         }
         if (payment_status == null) {
-            return    res.json({
+            return    res.status(400).json({
                 message: "Payment status cannot be exist",
             });
         }
         if (!order_id) {
-            return     res.json({
+            return     res.status(400).json({
                 message: "Order id cannot be exist",
             });
         }
         if (!user_id) {
-            return      res.json({
+            return      res.status(400).json({
                 message: "User id cannot be exist",
             });
         }
@@ -50,7 +50,7 @@ const PaymentController = {
     getPaymentByUserID: async (req, res, next) => {
         const { user_id } = req.body;
         if (!user_id) {
-            return   res.json({
+            return   res.status(400).json({
                 message: "User id cannot be exist",
             });
         }

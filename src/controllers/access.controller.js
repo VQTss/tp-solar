@@ -6,7 +6,7 @@ const AccessToken = {
     login: async (req, res, next) => {
         const { username, password } = req.body;
         if (!username || !password) {
-            res.json({
+          return  res.status(400).json({
                 "message": "Username or password is not in body"
             });
         }else{
@@ -27,13 +27,13 @@ const AccessToken = {
     register: async (req, res, next) => {
         const { username, email, password , inforUser } = req.body;
         if (!username || !email || !password) {
-            res.json({
+          return  res.status(400).json({
                 "message": "Username or email or password is not in body"
             });
         }
 
         if (!inforUser) {
-            res.json({
+         return   res.status(400).json({
                 "message": "InforUser is not in body"
             })
         }else{

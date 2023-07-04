@@ -18,7 +18,7 @@ const categoriesController = {
     createCategory: async (req, res, next) => {
         const{category_name} = req.body;
         if (!category_name) {
-          return  res.json({
+          return  res.status(400).json({
                 "message" : "Category name is not in body "
             });
         }
@@ -33,12 +33,12 @@ const categoriesController = {
     updateCategories : async (req, res, next) => {
         const {category_id, category_name} = req.body;
         if (!category_id) {
-         return   res.json({
+         return   res.status(400).json({
                 "message" : "Category id is not in body "
             });
         }
         if (!category_name) {
-         return   res.json({
+         return   res.status(400).json({
                 "message" : "Category name is not in body "
             });
         }
@@ -53,7 +53,7 @@ const categoriesController = {
     deleteCategories : async (req, res, next) => {
         const {category_id} = req.body;
         if (!category_id) {
-          return  res.json({
+          return  res.status(400).json({
                 "message" : "Category id is not in body "
             });
         }

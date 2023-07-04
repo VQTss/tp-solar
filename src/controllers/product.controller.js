@@ -17,7 +17,7 @@ const productController = {
     getProductById: async (req, res, next) => {
         const { product_id } = req.body;
         if (!product_id) {
-            return res.json({
+            return res.status(400).json({
                 "message": "Product id is not in body "
             });
         }
@@ -34,7 +34,7 @@ const productController = {
     getProductByCategory: async (req, res, next) => {
         const { category_id } = req.body;
         if (!category_id) {
-            return res.json({
+            return res.status(400).json({
                 "message": "Category id is not in body "
             });
         }
@@ -51,32 +51,32 @@ const productController = {
     createProduct: async (req, res, next) => {
         const { product_id, product_name, product_price, product_discount, flash_sale, category_id } = req.body;
         if (!product_id) {
-            return res.json({
+            return res.status(400).json({
                 "message": "Product id is not in body "
             })
         }
         if (!product_name) {
-            return res.json({
+            return res.status(400).json({
                 "message": "Product name is not in body "
             });
         }
         if (!product_price) {
-            return res.json({
+            return res.status(400).json({
                 "message": "Product price is not in body "
             });
         }
         if (product_discount < 0) {
-            return res.json({
+            return res.status(400).json({
                 "message": "Product discount is cannot be negative "
             });
         }
         if (flash_sale == null) {
-            return res.json({
+            return res.status(400).json({
                 "message": "Flash sale is not in body "
             });
         }
         if (!category_id) {
-            return res.json({
+            return res.status(400).json({
                 "message": "Category id is not in body "
             });
         }
@@ -94,32 +94,32 @@ const productController = {
     updateProduct: async (req, res, next) => {
         const { product_id, product_name, product_price, product_discount, flash_sale, category_id } = req.body;
         if (!product_id) {
-            return res.json({
+            return res.status(400).json({
                 "message": "Product id is not in body "
             });
         }
         if (!product_name) {
-            return res.json({
+            return res.status(400).json({
                 "message": "Product name is not in body "
             });
         }
         if (!product_price) {
-            return res.json({
+            return res.status(400).json({
                 "message": "Product price is not in body "
             });
         }
         if (product_discount < 0) {
-            return res.json({
+            return res.status(400).json({
                 "message": "Product discount is not in body "
             });
         }
         if (flash_sale == null) {
-            return res.json({
+            return res.status(400).json({
                 "message": "Flash sale is not in body "
             });
         }
         if (!category_id) {
-            return res.json({
+            return res.status(400).json({
                 "message": "Category id is not in body "
             });
         }
@@ -137,7 +137,7 @@ const productController = {
     deleteProduct: async (req, res, next) => {
         const { product_id } = req.body;
         if (!product_id) {
-            return res.json({
+            return res.status(400).json({
                 "message": "Product id is not in body "
             });
         }

@@ -9,7 +9,7 @@ const CartController = {
         try {
             const { id } = req.body;
             if (!id) {
-                res.json({
+              return  res.status(400).json({
                     "message": "id is not in body"
                 });
             } else {
@@ -28,17 +28,17 @@ const CartController = {
     addCart: async (req, res, next) => {
         const { product_id, quantity, user_id } = req.body;
         if (!product_id) {
-            return res.json({
+            return res.status(400).json({
                 "message": "Product id is not in body"
             });
         }
         if (!quantity) {
-            return res.json({
+            return res.status(400).json({
                 "message": "Quantity is not in body"
             });
         }
         if (!user_id) {
-            return res.json({
+            return res.status(400).json({
                 "message": "User id is not in body"
             });
         }
@@ -57,11 +57,16 @@ const CartController = {
     updateCart: async (req, res, next) => {
         const { id } = req.body;
         if (!id) {
-            return res.json({
+            return res.status(400).json({
                 "message": "id is not in body"
             });
         }
         const { quantity } = req.body;
+        if (!quantity) {
+            return res.status(400).json({
+                "message": "Quantity is not in body"
+            });
+        }
         try {
             const data = await cartServices.updateCart(id, quantity);
             new SuccessResponse({
@@ -78,7 +83,7 @@ const CartController = {
     deleteCart: async (req, res, next) => {
         const { id } = req.body;
         if (!id) {
-            return res.json({
+            return res.status(400).json({
                 "message": "id is not in body"
             });
         }

@@ -10,7 +10,7 @@ const AccountController = {
     getAccounts: async (req, res, next) => {
         try {
             const accounts = await AccountsService.getAccounts();
-            res.json(accounts);
+            return res.status(200).json(accounts);
         } catch (error) {
             next(error);
         }
@@ -19,7 +19,7 @@ const AccountController = {
         try {
             const { id } = req.body;
             if (!id) {
-                res.json({
+               return res.status(400).json({
                     "message": "id is not in body"
                 });
             } else {
@@ -37,7 +37,7 @@ const AccountController = {
         try {
             const { id } = req.body;
             if (!id) {
-                res.json({
+              return  res.status(400).json({
                     "message": "id is not in body"
                 });
             } else {
