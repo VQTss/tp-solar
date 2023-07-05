@@ -50,8 +50,8 @@ const productServices = {
 
             return data;
         } catch (error) {
-            console.log("error", error);
-            throw new BadRequestError(error);
+            console.log("error.parent", error.parent);
+            return error.parent;    
         }
     },
     updateProduct : async (product_id, product_name, product_price, product_discount, flash_sale ,category_id) => {
