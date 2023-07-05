@@ -5,6 +5,15 @@ const cookieParser = require('cookie-parser');
 const app = express();
 const routers = require('./routes/index');
 const morgan = require('morgan');
+const cors = require('cors');
+const bodyParser = require('body-parser');
+
+// body-parser
+app.use(bodyParser.json());
+
+// Cors
+app.use(cors());
+
 
 app.use(cookieParser());
 app.use(express.json());
