@@ -50,7 +50,7 @@ const productServices = {
 
             return data;
         } catch (error) {
-            throw new BadRequestError(error.message);
+            throw new BadRequestError(error);
         }
     },
     updateProduct : async (product_id, product_name, product_price, product_discount, flash_sale ,category_id) => {
