@@ -1,10 +1,11 @@
 
 const models = require('../../models/index');
+const { BadRequestError } = require('../core/error.response');
 const Payment = models.Payment;
-
+const Cart = models.cart;
 
 const PaymentServices = {
-    addPayment: async (payment_method, payment_status, order_id , user_id) => {
+    addPayment: async (payment_method, payment_status, order_id, user_id) => {
         try {
             const payment = await Payment.create({
                 payment_method,
@@ -13,9 +14,18 @@ const PaymentServices = {
                 user_id,
             });
             if (!payment) {
-                throw new Error('Cannot create payment');
+                throw new BadRequestError('Cannot create payment');
             } else {
-                return payment;
+                const cart = await Cart.destroy({
+                    where: {
+                        user_id: user_id,
+                    }
+                });
+                if (!cart) {
+                    throw new BadRequestError('Cannot delete cart');
+                }else{
+                    return payment;
+                }
             }
         } catch (error) {
             throw new Error(error.message);
