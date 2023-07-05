@@ -50,7 +50,6 @@ const productServices = {
 
             return data;
         } catch (error) {
-            console.log("error.parent", error.parent);
             return error.parent;    
         }
     },
