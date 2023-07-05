@@ -50,6 +50,7 @@ const productServices = {
 
             return data;
         } catch (error) {
+            console.log("error", error);
             throw new BadRequestError(error);
         }
     },
