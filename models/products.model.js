@@ -40,7 +40,6 @@ module.exports = (sequelize, DataTypes) => {
                 notEmpty: { msg: "Product discount cannot be empty" },
                 isInt: { msg: "Product discount must be an integer" },
                 min: { args: [0], msg: "Product discount must be greater than 0" },
-                max: { args: [100], msg: "Product discount must be less than 100" },
             },
         },
         flash_sale: {
