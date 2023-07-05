@@ -22,7 +22,7 @@ module.exports = (sequelize, DataTypes) => {
             },
         },
         product_price: {
-            type: DataTypes.INTEGER,
+            type: DataTypes.BIGINT,
             allowNull: false,
             validate: {
                 notNull: { msg: "Product price cannot be null" },
@@ -32,7 +32,7 @@ module.exports = (sequelize, DataTypes) => {
             },
         },
         product_discount: {
-            type: DataTypes.INTEGER,
+            type: DataTypes.BIGINT,
             allowNull: false,
             defaultValue: 0,
             validate: {
