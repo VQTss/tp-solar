@@ -44,7 +44,7 @@ const AccessServices = {
                 address: inforUser.address,
             });
             if (!user) {
-                throw new NotFoundError("User not register");
+                return new NotFoundError("User not register");
             }
             const salt = await bcrypt.genSalt(10);
             const hashed = await bcrypt.hash(password, salt);
@@ -59,7 +59,7 @@ const AccessServices = {
             return data;
 
         } catch (error) {
-            throw new BadRequestError(error);
+            return error.parent;    
         }
     },
 
@@ -71,11 +71,11 @@ const AccessServices = {
             }
         })
         if (!account) {
-            throw new NotFoundError("Account not found");
+            return new NotFoundError("Username wrong");
         }
         const validPassword = await bcrypt.compare(password, account.password);
         if (!validPassword) {
-            throw new NotFoundError("Password wrong");
+            return new NotFoundError("Password wrong");
         }
         const payload = {
             id: account.id,
@@ -107,7 +107,7 @@ const AccessServices = {
         let data = null;
         await jwt.verify(refreshToken, process.env.REFRESH_TOKEN, (err, user) => {
             if (err) {
-                throw new BadRequestError("Refresh token wrong");
+                return new BadRequestError("Refresh token wrong");
             }
             data = user;
         });

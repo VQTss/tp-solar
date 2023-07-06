@@ -34,7 +34,7 @@ const productServices = {
             });
             return data;
         } catch (error) {
-            throw new BadRequestError(error.message);
+            return error.parent;    
         }
     },
     createProduct : async (product_id, product_name, product_price, product_discount, flash_sale ,category_id) => {
@@ -72,7 +72,7 @@ const productServices = {
                 return "Fail"
             }
         } catch (error) {
-            throw new BadRequestError(error.message);
+            return error.parent;    
         }
     },
     deleteProduct : async (product_id) => {
@@ -84,7 +84,7 @@ const productServices = {
             });
             return data;
         } catch (error) {
-            throw new BadRequestError(error.message);
+            return error.parent;    
         }
     }
 
