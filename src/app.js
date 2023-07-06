@@ -8,16 +8,18 @@ const morgan = require('morgan');
 const cors = require('cors');
 const bodyParser = require('body-parser');
 
-// body-parser
-app.use(bodyParser.json());
+
 
 // Cors
 app.use(cors());
 
 
+
 app.use(cookieParser());
+
+// body-parser
 app.use(bodyParser.json({limit: "50mb"}));
-app.use(bodyParser.urlencoded({limit: "50mb", extended: true, parameterLimit:50000}));
+app.use(bodyParser.urlencoded({limit: "50mb", extended: false, parameterLimit:50000}));
 
 // Morgan
 
