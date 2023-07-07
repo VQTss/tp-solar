@@ -26,7 +26,7 @@ const imageProductServices = {
             });
             return data;
         } catch (error) {
-            throw new BadRequestError("Error: Create image product failed");
+            return error;
         }
     },
     updateImageProduct: async (product_id, image_base64, image_name) => {
