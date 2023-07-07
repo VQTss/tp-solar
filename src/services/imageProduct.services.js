@@ -1,4 +1,5 @@
 
+const e = require('express');
 const model = require('../../models/index');
 const { BadRequestError } = require('../core/error.response');
 const image_product = model.image_product;
@@ -14,7 +15,7 @@ const imageProductServices = {
             });
             return data;
         } catch (error) {
-            throw new BadRequestError("Error: Get image product by id failed");
+            return error;
         }
     },
     createImageProduct: async (product_id, image_base64, image_name) => {
@@ -41,7 +42,7 @@ const imageProductServices = {
             });
             return data;
         } catch (error) {
-            throw new BadRequestError("Error: Update image product failed");
+            return error;
         }
     },
     deleteImageProduct: async (product_id) => {
@@ -53,7 +54,7 @@ const imageProductServices = {
             });
             return data;
         } catch (error) {
-            throw new BadRequestError("Error: Delete image product failed");
+            return error;
         }
     },
 };
