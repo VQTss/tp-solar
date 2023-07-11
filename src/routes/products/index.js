@@ -33,5 +33,6 @@ router.delete('/delete-product', productController.deleteProduct); // delete pro
 router.post('/create-image-product', imageProductController.createImageProduct); // create image product
 router.put('/update-image-product', imageProductController.updateImageProduct); // update image product
 router.delete('/delete-image-product', imageProductController.deleteImageProduct); // delete image product
+router.get('/get-all-image', imageProductController.getAllImage); //get all image
 
 module.exports = router;

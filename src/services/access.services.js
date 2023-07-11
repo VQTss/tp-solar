@@ -115,6 +115,7 @@ const AccessServices = {
         if (data === null) {
             return new BadRequestError("Refresh token wrong");
         }
+        console.log("data", data);
         
         const account = await Account.findOne({
             where: {

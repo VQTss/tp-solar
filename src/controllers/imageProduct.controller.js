@@ -74,6 +74,13 @@ const imageProductController = {
             metadata: data,
         }).send(res);
     },
+    getAllImage : async (req, res) => {
+        const data = await imageProductServices.getAllImage();
+        new SuccessResponse({
+            message: "Get all image product successfully",
+            metadata: data,
+        }).send(res);
+    },
 };
 
 module.exports = imageProductController;

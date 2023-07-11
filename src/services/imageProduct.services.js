@@ -57,6 +57,14 @@ const imageProductServices = {
             return error;
         }
     },
+    getAllImage : async () => {
+        try {
+            const data = await image_product.findAll({});
+            return data;
+        } catch (error) {
+            return error;
+        }
+    },
 };
 
 
