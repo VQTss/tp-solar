@@ -115,7 +115,7 @@ const AccessServices = {
         if (data === null) {
             return new BadRequestError("Refresh token wrong");
         }
-        console.log("data", data);
+        // console.log("data", data);
         
         const account = await Account.findOne({
             where: {
@@ -129,7 +129,7 @@ const AccessServices = {
         account.accessToken = newAccessToken;
         account.refreshToken = newRefreshToken;
         await account.save();
-        const result = getInforData({ fileds: ["accessToken", "refreshToken"], object: account });
+        const result = await getInforData({ fileds: ["accessToken", "refreshToken"], object: account });
         return result;
     } 
 };

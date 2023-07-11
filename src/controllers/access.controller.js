@@ -55,7 +55,7 @@ const AccessToken = {
         }).send(res);
     },
     refreshToken: async (req, res, next) => {
-        const refreshToken = req.cookies.refreshToken;
+        const {refreshToken} = req.body;
         const user = await AccessServices.requestRefreshToken(refreshToken);
         res.cookie("refreshToken", user.refreshToken, {
             httpOnly: true,
