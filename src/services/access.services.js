@@ -107,15 +107,20 @@ const AccessServices = {
         let data = null;
         await jwt.verify(refreshToken, process.env.REFRESH_TOKEN, (err, user) => {
             if (err) {
-                return new BadRequestError("Refresh token wrong");
+                return {
+                    error: "Refresh token wrong",
+                    status: 400
+                };
             }
             data = user;
         });
         
         if (data === null) {
-            return new BadRequestError("Refresh token wrong");
+            return {
+                error: "Refresh token wrong",
+                status: 400
+            };
         }
-        // console.log("data", data);
         
         const account = await Account.findOne({
             where: {
