@@ -31,5 +31,7 @@ router.post('/create-product', productController.createProduct); // create produ
 router.put('/update-product', productController.updateProduct); // update product
 router.delete('/delete-product', productController.deleteProduct); // delete product
 router.post('/create-image-product', imageProductController.createImageProduct); // create image product
+router.put('/update-image-product', imageProductController.updateImageProduct); // update image product
+router.delete('/delete-image-product', imageProductController.deleteImageProduct); // delete image product
 
 module.exports = router;

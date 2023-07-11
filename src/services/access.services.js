@@ -111,11 +111,18 @@ const AccessServices = {
             }
             data = user;
         });
+        
+        if (data === null) {
+            return new BadRequestError("Refresh token wrong");
+        }
+        
         const account = await Account.findOne({
             where: {
                 id: data.id
             }
         })
+        
+
         const newAccessToken = AccessServices.generateAccessToken(data);
         const newRefreshToken = AccessServices.generateRefreshToken(data);
         account.accessToken = newAccessToken;

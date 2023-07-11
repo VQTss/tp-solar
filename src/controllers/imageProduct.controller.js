@@ -39,8 +39,8 @@ const imageProductController = {
         }).send(res);
     },
     updateImageProduct: async (req, res) => {
-        const { product_id, image_base64, image_name } = req.body;
-        if (!product_id) {
+        const { image_id, image_base64, image_name } = req.body;
+        if (!image_id) {
             return   res.status(400).json({
                 message: "Product id is not in body",
             });
@@ -62,10 +62,10 @@ const imageProductController = {
         }).send(res);
     },
     deleteImageProduct: async (req, res) => {
-        const { product_id } = req.body;
-        if (!product_id) {
+        const { image_id } = req.body;
+        if (!image_id) {
             return    res.status(400).json({
-                message: "Product id is not in body",
+                message: "Image id is not in body",
             });
         }
         const data = await imageProductServices.deleteImageProduct(product_id);

@@ -30,14 +30,14 @@ const imageProductServices = {
             return error;
         }
     },
-    updateImageProduct: async (product_id, image_base64, image_name) => {
+    updateImageProduct: async (image_id, image_base64, image_name) => {
         try {
             const data = await image_product.update({
                 image_base64: image_base64,
                 image_name: image_name
             }, {
                 where: {
-                    product_id: product_id
+                    image_id: image_id,
                 }
             });
             return data;
@@ -45,11 +45,11 @@ const imageProductServices = {
             return error;
         }
     },
-    deleteImageProduct: async (product_id) => {
+    deleteImageProduct: async (image_id) => {
         try {
             const data = await image_product.destroy({
                 where: {
-                    product_id: product_id
+                    product_id: image_id
                 }
             });
             return data;
