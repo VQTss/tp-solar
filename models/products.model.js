@@ -63,6 +63,10 @@ module.exports = (sequelize, DataTypes) => {
                 notEmpty: { msg: "Category ID cannot be empty" },
             },
         },
+        specifications :  {
+            type: DataTypes.JSON,
+            allowNull: true,
+        }
     
     });
     Product.associate = (models) => {

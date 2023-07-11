@@ -37,7 +37,7 @@ const productServices = {
             return error.parent;    
         }
     },
-    createProduct : async (product_id, product_name, product_price, product_discount, flash_sale ,category_id) => {
+    createProduct : async (product_id, product_name, product_price, product_discount, flash_sale ,category_id, specifications) => {
         try {
             const data = await Products.create({
                 product_id: product_id,
@@ -45,22 +45,23 @@ const productServices = {
                 product_price: product_price,
                 product_discount: product_discount,
                 flash_sale: flash_sale,
-                category_id: category_id
+                category_id: category_id,
+                specifications: specifications
             });
-
             return data;
         } catch (error) {
             return error.parent;    
         }
     },
-    updateProduct : async (product_id, product_name, product_price, product_discount, flash_sale ,category_id) => {
+    updateProduct : async (product_id, product_name, product_price, product_discount, flash_sale ,category_id,specifications) => {
         try {
             const data = await Products.update({
                 product_name: product_name,
                 product_price: product_price,
                 product_discount: product_discount,
                 flash_sale: flash_sale,
-                category_id: category_id
+                category_id: category_id,
+                specifications: specifications
             },{
                 where: {
                     product_id: product_id

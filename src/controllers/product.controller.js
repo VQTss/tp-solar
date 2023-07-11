@@ -49,7 +49,7 @@ const productController = {
             ).send(res);
     },
     createProduct: async (req, res, next) => {
-        const { product_id, product_name, product_price, product_discount, flash_sale, category_id } = req.body;
+        const { product_id, product_name, product_price, product_discount, flash_sale, category_id,specifications } = req.body;
         if (!product_id) {
             return res.status(400).json({
                 "message": "Product id is not in body "
@@ -80,7 +80,7 @@ const productController = {
                 "message": "Category id is not in body "
             });
         }
-        const data = await productServices.createProduct(product_id, product_name, product_price, product_discount, flash_sale, category_id);
+        const data = await productServices.createProduct(product_id, product_name, product_price, product_discount, flash_sale, category_id,specifications);
 
         new SuccessResponse
             (
@@ -92,7 +92,7 @@ const productController = {
             ).send(res);
     },
     updateProduct: async (req, res, next) => {
-        const { product_id, product_name, product_price, product_discount, flash_sale, category_id } = req.body;
+        const { product_id, product_name, product_price, product_discount, flash_sale, category_id ,specifications} = req.body;
         if (!product_id) {
             return res.status(400).json({
                 "message": "Product id is not in body "
@@ -123,7 +123,7 @@ const productController = {
                 "message": "Category id is not in body "
             });
         }
-        const data = await productServices.updateProduct(product_id, product_name, product_price, product_discount, flash_sale, category_id);
+        const data = await productServices.updateProduct(product_id, product_name, product_price, product_discount, flash_sale, category_id,specifications);
 
         new SuccessResponse
             (
