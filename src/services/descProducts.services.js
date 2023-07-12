@@ -2,6 +2,7 @@
 const model = require('../../models/index');
 
 const desc_products = model.desc_product;
+const { BadRequestError } = require('../../src/core/error.response');
 
 const descProductsServices = {
     getDescProductsByID: async (product_id) => {
