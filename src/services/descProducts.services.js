@@ -24,7 +24,7 @@ const descProductsServices = {
             });
             return descProduct;
         } catch (error) {
-            throw new BadRequestError("Error: Create description product failed");
+            return new BadRequestError("Error: Create description product failed : " + error);
         }
     },
     updateDescProduct: async (product_id, description) => {
