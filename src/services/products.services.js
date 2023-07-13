@@ -4,6 +4,11 @@ const { BadRequestError } = require('../core/error.response')
 const models = require('../../models');
 const { getInforData } = require('../utils');
 const Products = models.product;
+const Cart = models.cart;
+const description = models.desc_product;
+const order_detail = models.order_details;
+const image = models.image_product;
+
 const productServices = {
     getProducts: async () => {
         try {
@@ -78,11 +83,39 @@ const productServices = {
     },
     deleteProduct : async (product_id) => {
         try {
-            const data = await Products.destroy({
+
+            const delelteImage = await image.destroy({
                 where: {
                     product_id: product_id
                 }
             });
+            const deleteDescription = await description.destroy({
+                where: {
+                    product_id: product_id
+                }
+            });
+            const deleteOrderDetail = await order_detail.destroy({
+                where: {
+                    product_id: product_id
+                }
+            });
+            const deleteCart = await Cart.destroy({
+                where: {
+                    product_id: product_id
+                }   
+            });
+
+            const data = null;
+
+            if (delelteImage[0] === 1 && deleteDescription[0] === 1 && deleteOrderDetail[0] === 1 && deleteCart[0] === 1) {
+                data = await Products.destroy({
+                    where: {
+                        product_id: product_id
+                    }
+                });
+            }
+
+           
             return data;
         } catch (error) {
             return error.parent;    
