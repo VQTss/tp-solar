@@ -105,17 +105,11 @@ const productServices = {
                 }   
             });
 
-            const data = null;
-
-            if (delelteImage[0] === 1 && deleteDescription[0] === 1 && deleteOrderDetail[0] === 1 && deleteCart[0] === 1) {
-                data = await Products.destroy({
-                    where: {
-                        product_id: product_id
-                    }
-                });
-            }
-
-           
+            const data = await Products.destroy({
+                where: {
+                    product_id: product_id
+                }
+            });
             return data;
         } catch (error) {
             return error.parent;    
