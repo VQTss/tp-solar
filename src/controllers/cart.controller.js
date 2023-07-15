@@ -104,7 +104,7 @@ const CartController = {
                 message: "Product id cannot be exist",
             });
         }
-        const order = await OrderServices.getCartByProductID(product_id);
+        const order = await cartServices.getCartByProductID(product_id);
         new SuccessResponse({
             message: "Get cart by product id successfully",
             metadata: order
