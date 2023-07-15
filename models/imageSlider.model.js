@@ -15,7 +15,7 @@ module.exports = (sequelize, DataTypes) => {
             }
         },
         slider_image: {
-            type: DataTypes.STRING,
+            type: DataTypes.TEXT,
             allowNull: false,
             validate: {
                 notNull: { msg: "Slider image cannot be null" },

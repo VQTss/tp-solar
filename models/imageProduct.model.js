@@ -13,7 +13,7 @@ module.exports = (sequelize, DataTypes) => {
         }
     },
         image_base64 : {
-            type: DataTypes.STRING,
+            type: DataTypes.TEXT,
             allowNull: false,
             validate: {
                 notNull: { msg: "Image base64 cannot be null" },
