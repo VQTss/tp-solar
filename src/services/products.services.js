@@ -17,7 +17,7 @@ const productServices = {
         } catch (error) {
            throw new BadRequestError(error.message);
         }
-    },
+    },  
     getProductById: async (id) => {
         try {
             const data = await Products.findOne({
