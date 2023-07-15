@@ -16,7 +16,7 @@ const OrderServices = {
                 order_status: order_status,
             });
             if (!order) {
-                throw new BadRequestError('Cannot create order');
+                return new BadRequestError('Cannot create order');
             } else {
                 const order_details = OrderDetails.create({
                     order_id: order.order_id,
@@ -27,13 +27,13 @@ const OrderServices = {
                     address,
                 });
                 if (!order_details) {
-                    throw new BadRequestError('Cannot create order details');
+                    return new BadRequestError('Cannot create order details');
                 } else {
                     return order_details;
                 }
             }
         } catch (error) {
-            throw new BadRequestError(error.message);
+            return new BadRequestError(error.message);
         }
     },
     updateOrder: async (order_details_id, order_total, order_status, product_id, quantity, phone, email, address) => {
