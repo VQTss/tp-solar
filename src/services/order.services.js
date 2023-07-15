@@ -4,6 +4,8 @@ const Order = models.order;
 const OrderDetails = models.order_details;
 const Product = models.product;
 const { BadRequestError } = require('../core/error.response');
+const db = require("./models");
+
 
 const OrderServices = {
     addOrder: async (user_id, order_total, order_status, product_id, quantity, phone, email, address) => {
@@ -119,24 +121,25 @@ const OrderServices = {
 
     getAllOrder: async () => {
         try {
-            const data = await Order.findAll({
-                include: [
-                    {
-                        model: OrderDetails,
-                        as: 'order_details',
-                        attributes: ['order_details_id', 'product_id', 'quantity', 'phone', 'email', 'address'],
-                        // include: [
-                        //     {
-                        //         model: Product,
-                        //         as: 'product',
-                        //         attributes: ['product_name', 'product_price', 'product_image'],
-                        //     }
-                        // ]
-                    },
+            // const data = await Order.findAll({
+            //     include: [
+            //         {
+            //             model: OrderDetails,
+            //             as: 'order_details',
+            //             attributes: ['order_details_id', 'product_id', 'quantity', 'phone', 'email', 'address'],
+            //             // include: [
+            //             //     {
+            //             //         model: Product,
+            //             //         as: 'product',
+            //             //         attributes: ['product_name', 'product_price', 'product_image'],
+            //             //     }
+            //             // ]
+            //         },
 
-                ],
-                attributes: ['order_id', 'order_total', 'order_status', 'order_date', 'user_id'],
-            });
+            //     ],
+            //     attributes: ['order_id', 'order_total', 'order_status', 'order_date', 'user_id'],
+            // });
+            const [result,data] = db.sequelize.query('SELECT * FROM orders LEFT JOIN order_details ON order_details.order_id = orders.order_id LEFT JOIN products ON products.product_id = order_details.product_id')
             return data;
         } catch (error) {
             return error;
