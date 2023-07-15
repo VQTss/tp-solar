@@ -25,6 +25,10 @@ const cartServices = {
     },
     addCart: async (product_id, quantity, user_id) => {
         try {
+
+
+
+
             const cart = await Cart.create({
                 product_id,
                 quantity,
@@ -65,6 +69,18 @@ const cartServices = {
             return cart;
         } catch (error) {
             throw new Error(error.message);
+        }
+    },
+    getCartByProductID : async (product_id) => {
+        try {
+            const data = await Cart.findAll({
+                where: {
+                    product_id: product_id
+                }
+            });
+            return data;
+        } catch (error) {
+            return error.parent;    
         }
     },
     

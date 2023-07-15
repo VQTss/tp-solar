@@ -97,7 +97,19 @@ const CartController = {
             throw new BadRequestError(error.message);
         }
     },
-
+    getCartByProductID: async (req, res, next) => {
+        const { product_id } = req.body;
+        if (!product_id) {
+            return res.status(400).json({
+                message: "Product id cannot be exist",
+            });
+        }
+        const order = await OrderServices.getCartByProductID(product_id);
+        new SuccessResponse({
+            message: "Get cart by product id successfully",
+            metadata: order
+        }).send(res);
+    },
 };
 
 module.exports = CartController;

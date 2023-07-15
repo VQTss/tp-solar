@@ -12,7 +12,7 @@ router.post('/', asynHandler(CartController.getCartByUserId));
 router.post('/create-cart', asynHandler(CartController.addCart));
 router.put('/update-cart', asynHandler(CartController.updateCart));
 router.delete('/delete-cart', asynHandler(CartController.deleteCart));
-
+router.post('/get-cart-by-product-id', asynHandler(CartController.getCartByProductID));
 
 
 
