@@ -159,6 +159,7 @@ const OrderServices = {
         //     ],
         //     attributes: ['order_id', 'order_total', 'order_status', 'order_date', 'user_id'],
         // });
+        const data = db.sequelize.query('SELECT * FROM orders LEFT JOIN order_details ON order_details.order_id = orders.order_id LEFT JOIN products ON products.product_id = order_details.product_id WHERE orders.user_id = ' + user_id)
         return data;
     },
     getOrderDetails: async (order_details_id) => {
@@ -171,12 +172,13 @@ const OrderServices = {
     },
     getOrderAndUserID: async (order_id, user_id) => {
         try {
-            const data = await Order.findAll({
-                where: {
-                    order_id: order_id,
-                    user_id: user_id,
-                },
-            });
+            // const data = await Order.findAll({
+            //     where: {
+            //         order_id: order_id,
+            //         user_id: user_id,
+            //     },
+            // });
+            const data = db.sequelize.query('SELECT * FROM orders LEFT JOIN order_details ON order_details.order_id = orders.order_id LEFT JOIN products ON products.product_id = order_details.product_id WHERE orders.user_id = ' + user_id + ' AND orders.order_id = ' + order_id)
             return data;
         } catch (error) {
             throw new BadRequestError(error.message);
