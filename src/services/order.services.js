@@ -140,7 +140,7 @@ const OrderServices = {
             //     attributes: ['order_id', 'order_total', 'order_status', 'order_date', 'user_id'],
             // });
             const [result,data] = db.sequelize.query('SELECT * FROM orders LEFT JOIN order_details ON order_details.order_id = orders.order_id LEFT JOIN products ON products.product_id = order_details.product_id')
-            return data;
+            return result;
         } catch (error) {
             return error;
         }
