@@ -146,19 +146,19 @@ const OrderServices = {
         }
     },
     getOrderByUserId: async (user_id) => {
-        const data = await Order.findAll({
-            where: {
-                user_id: user_id,
-            },
-            include: [
-                {
-                    model: OrderDetails,
-                    as: 'order_details',
-                    attributes: ['order_details_id', 'product_id', 'quantity', 'phone', 'email', 'address'],
-                }
-            ],
-            attributes: ['order_id', 'order_total', 'order_status', 'order_date', 'user_id'],
-        });
+        // const data = await Order.findAll({
+        //     where: {
+        //         user_id: user_id,
+        //     },
+        //     include: [
+        //         {
+        //             model: OrderDetails,
+        //             as: 'order_details',
+        //             attributes: ['order_details_id', 'product_id', 'quantity', 'phone', 'email', 'address'],
+        //         }
+        //     ],
+        //     attributes: ['order_id', 'order_total', 'order_status', 'order_date', 'user_id'],
+        // });
         return data;
     },
     getOrderDetails: async (order_details_id) => {

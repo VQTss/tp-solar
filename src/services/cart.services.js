@@ -26,8 +26,26 @@ const cartServices = {
     addCart: async (product_id, quantity, user_id) => {
         try {
 
-
-
+            const checkProduct = await Cart.findOne({
+                where: {
+                    product_id: product_id,
+                    user_id: user_id,
+                },
+            });
+            if (checkProduct) {
+                const cart = await Cart.update(
+                    {
+                        quantity: checkProduct.quantity + quantity,
+                    },
+                    {
+                        where: {
+                            product_id: product_id,
+                            user_id: user_id,
+                        },
+                    }
+                );
+                return cart[0];
+            }    
 
             const cart = await Cart.create({
                 product_id,
@@ -71,11 +89,12 @@ const cartServices = {
             throw new Error(error.message);
         }
     },
-    getCartByProductID : async (product_id) => {
+    getCartByProductID : async (product_id,user_id) => {
         try {
             const data = await Cart.findAll({
                 where: {
-                    product_id: product_id
+                    product_id: product_id,
+                    user_id: user_id,
                 }
             });
             return data;
