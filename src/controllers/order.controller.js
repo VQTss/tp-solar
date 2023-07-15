@@ -47,7 +47,7 @@ const OrderController = {
         }
         const order = OrderServices.addOrder(user_id, order_total, order_status, product_id, quantity, phone, email, address);
         new SuccessResponse({
-            order: order,
+            metadata: order,
             message: "Add order successfully",
         }).send(res);
     },
