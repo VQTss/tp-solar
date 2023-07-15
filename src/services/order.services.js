@@ -4,7 +4,7 @@ const Order = models.order;
 const OrderDetails = models.order_details;
 const Product = models.product;
 const { BadRequestError } = require('../core/error.response');
-const db = require("./models");
+const db = require("../../models/index");
 
 
 const OrderServices = {
