@@ -125,13 +125,13 @@ const OrderServices = {
                         model: OrderDetails,
                         as: 'order_details',
                         attributes: ['order_details_id', 'product_id', 'quantity', 'phone', 'email', 'address'],
-                        include: [
-                            {
-                                model: Product,
-                                as: 'product',
-                                attributes: ['product_name', 'product_price', 'product_image'],
-                            }
-                        ]
+                        // include: [
+                        //     {
+                        //         model: Product,
+                        //         as: 'product',
+                        //         attributes: ['product_name', 'product_price', 'product_image'],
+                        //     }
+                        // ]
                     },
 
                 ],
