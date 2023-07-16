@@ -16,11 +16,9 @@ const OrderServices = {
                 order_status: order_status,
             });
             await order.save();
-            console.log("==========  order  ==========", order);
             if (!order) {
                 return "Cannot create order"
             } else {
-                console.log("========== productInJSON  ==========", products);
                 const order_details = await OrderDetails.create({
                     order_id: order.order_id,
                     products : products,
@@ -30,7 +28,6 @@ const OrderServices = {
                     address,
                 });
                 await order_details.save();
-                console.log("==========  order_details  ==========", order_details);
                 if (!order_details) {
                     return "Cannot create order details";
                 } else {
@@ -38,7 +35,6 @@ const OrderServices = {
                 }
             }
         } catch (error) {
-            console.log("==========  error  ==========", error);
             return error;
         }
     },
