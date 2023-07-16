@@ -20,6 +20,6 @@ router.get('/get-payment-by-user-id', asynHandler(PaymentController.getPaymentBy
 router.use(authMiddleware.verifyTokenAndAdminAuth);
 
 router.get('/get-all-payments', asynHandler(PaymentController.getAllPayments));
-
+router.post('/update-payment-status', asynHandler(PaymentController.getPaymentByUpdateStatus));
 
 module.exports = router;

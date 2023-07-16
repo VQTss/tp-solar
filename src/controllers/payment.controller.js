@@ -60,6 +60,34 @@ const PaymentController = {
             message: "Get payment by user id successfully",
         }).send(res);
     },
-
+    // get payment by update status
+    getPaymentByUpdateStatus: async (req, res, next) => {
+        const  {payment_id,payment_status, order_id, user_id} = req.body;
+        if (!payment_id) {
+            return   res.status(400).json({
+                message: "Payment id cannot be exist",
+            });
+        }
+        if (payment_status == null || payment_status == "") {
+            return    res.status(400).json({
+                message: "Payment status cannot be exist",
+            });
+        }
+        if (!order_id) {
+            return     res.status(400).json({
+                message: "Order id cannot be exist",
+            });
+        }
+        if (!user_id) {
+            return      res.status(400).json({
+                message: "User id cannot be exist",
+            });
+        }
+        const payments = await PaymentServices.paymentUpdateStatus(payment_id,payment_status, order_id, user_id);
+        new SuccessResponse({
+            metadata: payments,
+            message: "Get payment by update status successfully",
+        }).send(res);
+    },
 };
 module.exports = PaymentController;

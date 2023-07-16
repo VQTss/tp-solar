@@ -180,6 +180,24 @@ const OrderController = {
             metadata: order
         }).send(res);
     },
+    // getOrderByIDAndUser : async (req, res, next) => {
+    //     const { order_id, user_id } = req.body;
+    //     if (!order_id) {
+    //         return res.status(400).json({
+    //             message: "Order id cannot be exist",
+    //         });
+    //     }
+    //     if (!user_id) {
+    //         return res.status(400).json({
+    //             message: "User id cannot be exist",
+    //         });
+    //     }
+    //     const order = await OrderServices.getOrderByIDAndUser(order_id, user_id);
+    //     new SuccessResponse({
+    //         message: "Get order details successfully",
+    //         metadata: order
+    //     }).send(res);
+    // },
 };
 
 module.exports = OrderController;

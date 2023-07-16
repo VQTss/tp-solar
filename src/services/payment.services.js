@@ -72,6 +72,20 @@ const PaymentServices = {
             return new Error(error.message);
         }
     },
+    paymentUpdateStatus : async (payment_id,payment_status, order_id, user_id) => {
+        try {
+            const payment = await Payment.update({
+                payment_status: payment_status,
+            }).where({
+                payment_id: payment_id,
+                order_id: order_id,
+                user_id: user_id,
+            }).save();
+            return payment[0];
+        } catch (error) {
+            return new Error(error.message);
+        }
+    }
 };
 
 module.exports = PaymentServices;
