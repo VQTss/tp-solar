@@ -16,7 +16,6 @@ const OrderServices = {
                 order_status: order_status,
             });
             await order.save();
-            console.log("==========  order  ==========", order);
             if (!order) {
                 return "Cannot create order"
             } else {
@@ -39,7 +38,7 @@ const OrderServices = {
                 }
             }
         } catch (error) {
-            return new BadRequestError(error);
+            return error.message;
         }
     },
     updateOrder: async (order_details_id, order_total, order_status, products, quantity, phone, email, address) => {

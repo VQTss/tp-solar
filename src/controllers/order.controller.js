@@ -4,8 +4,6 @@ const { SuccessResponse } = require("../core/success.response");
 
 const OrderController = {
     addOrder: async (req, res, next) => {
-        console.log("==========  req.body  ==========", req.body);
-
         const { user_id, order_total, order_status, products, quantity, phone, email, address } = req.body;
         if (!user_id) {
             return res.status(400).json({
