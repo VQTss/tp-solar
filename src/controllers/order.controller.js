@@ -27,7 +27,7 @@ const OrderController = {
         }
         if (!name) {
             return res.status(400).json({
-                message: "Quantity cannot be exist",
+                message: "Name cannot be exist",
             });
         }
         if (!phone) {
@@ -54,11 +54,11 @@ const OrderController = {
     updateOrder: async (req, res, next) => {
         const { order_id, order_total, order_status, products, name, phone, email, address } = req.body;
 
-        if (!user_id) {
-            return res.status(400).json({
-                message: "User id cannot be exist",
-            });
-        }
+        // if (!user_id) {
+        //     return res.status(400).json({
+        //         message: "User id cannot be exist",
+        //     });
+        // }
         if (!order_total) {
             return res.status(400).json({
                 message: "Order total cannot be exist",
@@ -95,7 +95,7 @@ const OrderController = {
             });
         }
 
-        const order = await OrderServices.updateOrder(order_id, order_total, order_status, products, name, phone, email,);
+        const order = await OrderServices.updateOrder(order_id, order_total, order_status, products, quantity, phone, email,);
         new SuccessResponse({
             metadata: order,
             message: "Update order successfully",
