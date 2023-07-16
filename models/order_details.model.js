@@ -12,7 +12,7 @@ module.exports = (sequelize, Sequelize) => {
             allowNull: false
         },
         products: {
-            type: DataTypes.JSON,
+            type: DataTypes.JSONB,
             allowNull: false
         },
         address : {
