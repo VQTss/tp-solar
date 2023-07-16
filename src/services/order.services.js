@@ -18,8 +18,8 @@ const OrderServices = {
             if (!order) {
                 return new BadRequestError('Cannot create order');
             } else {
-                console.log("======== order ======== :" ,order);
-                const order_details = OrderDetails.create({
+                // console.log("======== order ======== :" ,order);
+                const order_details = await OrderDetails.create({
                     order_id: order.dataValues.order_id,
                     product_id,
                     quantity,
@@ -27,7 +27,7 @@ const OrderServices = {
                     email,
                     address,
                 });
-                console.log("======== order_details ======== :" ,order_details);
+                // console.log("======== order_details ======== :" ,order_details);
                 if (!order_details) {
                     return new BadRequestError('Cannot create order details');
                 } else {
