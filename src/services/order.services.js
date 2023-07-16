@@ -21,7 +21,7 @@ const OrderServices = {
             } else {
                 const order_details = await OrderDetails.create({
                     order_id: order.order_id,
-                    products :products,
+                    products : JSON.parse(products),
                     quantity,
                     phone,
                     email,
