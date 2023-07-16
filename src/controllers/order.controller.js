@@ -4,8 +4,9 @@ const { SuccessResponse } = require("../core/success.response");
 
 const OrderController = {
     addOrder: async (req, res, next) => {
-        const { user_id, order_total, order_status, products, quantity, phone, email, address } = req.body;
         console.log("==========  req.body  ==========", req.body);
+
+        const { user_id, order_total, order_status, products, quantity, phone, email, address } = req.body;
         if (!user_id) {
             return res.status(400).json({
                 message: "User id cannot be exist",
