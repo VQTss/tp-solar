@@ -7,7 +7,7 @@ const { BadRequestError } = require('../core/error.response');
 const db = require("../../models/index");
 
 const OrderServices = {
-    addOrder: async (user_id, order_total, order_status, product_id, quantity, phone, email, address) => {
+    addOrder: async (user_id, order_total, order_status, products, quantity, phone, email, address) => {
         try {
             const order = await Order.create({
                 user_id: user_id,
@@ -19,7 +19,7 @@ const OrderServices = {
             } else {
                 const order_details = await OrderDetails.create({
                     order_id: order.order_id,
-                    product_id,
+                    products :products,
                     quantity,
                     phone,
                     email,
@@ -35,7 +35,7 @@ const OrderServices = {
             return new BadRequestError(error.message);
         }
     },
-    updateOrder: async (order_details_id, order_total, order_status, product_id, quantity, phone, email, address) => {
+    updateOrder: async (order_details_id, order_total, order_status, products, quantity, phone, email, address) => {
 
         try {
             const order_details = await OrderDetails.findOne({
@@ -49,7 +49,6 @@ const OrderServices = {
                 const order = await Order.update({
                     order_total: order_total,
                     order_status: order_status,
-                    // order_date : order_date,
                 }, {
                     where: {
                         order_id: order_details.order_id,
@@ -59,7 +58,7 @@ const OrderServices = {
                     throw new Error('Cannot update order');
                 } else {
                     const order_details = await OrderDetails.update({
-                        product_id,
+                        products :products,
                         quantity,
                         phone,
                         email,
@@ -120,45 +119,15 @@ const OrderServices = {
 
     getAllOrder: async () => {
         try {
-            // const data = await Order.findAll({
-            //     include: [
-            //         {
-            //             model: OrderDetails,
-            //             as: 'order_details',
-            //             attributes: ['order_details_id', 'product_id', 'quantity', 'phone', 'email', 'address'],
-            //             // include: [
-            //             //     {
-            //             //         model: Product,
-            //             //         as: 'product',
-            //             //         attributes: ['product_name', 'product_price', 'product_image'],
-            //             //     }
-            //             // ]
-            //         },
-
-            //     ],
-            //     attributes: ['order_id', 'order_total', 'order_status', 'order_date', 'user_id'],
-            // });
-            const data = db.sequelize.query('SELECT * FROM orders LEFT JOIN order_details ON order_details.order_id = orders.order_id LEFT JOIN products ON products.product_id = order_details.product_id')
+            const data = db.sequelize.query('SELECT * FROM orders LEFT JOIN order_details ON order_details.order_id = orders.order_id ')
             return data;
         } catch (error) {
             return error;
         }
     },
     getOrderByUserId: async (user_id) => {
-        // const data = await Order.findAll({
-        //     where: {
-        //         user_id: user_id,
-        //     },
-        //     include: [
-        //         {
-        //             model: OrderDetails,
-        //             as: 'order_details',
-        //             attributes: ['order_details_id', 'product_id', 'quantity', 'phone', 'email', 'address'],
-        //         }
-        //     ],
-        //     attributes: ['order_id', 'order_total', 'order_status', 'order_date', 'user_id'],
-        // });
-        const data = db.sequelize.query('SELECT * FROM orders LEFT JOIN order_details ON order_details.order_id = orders.order_id LEFT JOIN products ON products.product_id = order_details.product_id WHERE orders.user_id = ' + user_id)
+
+        const data = await db.sequelize.query('SELECT * FROM orders LEFT JOIN order_details ON order_details.order_id = orders.order_id LEFT JOIN products ON products.product_id = order_details.product_id WHERE orders.user_id = ' + user_id)
         return data;
     },
     getOrderDetails: async (order_details_id) => {
@@ -171,13 +140,8 @@ const OrderServices = {
     },
     getOrderAndUserID: async (order_id, user_id) => {
         try {
-            // const data = await Order.findAll({
-            //     where: {
-            //         order_id: order_id,
-            //         user_id: user_id,
-            //     },
-            // });
-            const data = db.sequelize.query('SELECT * FROM orders LEFT JOIN order_details ON order_details.order_id = orders.order_id LEFT JOIN products ON products.product_id = order_details.product_id WHERE orders.user_id = ' + user_id + ' AND orders.order_id = ' + order_id)
+
+            const data = await db.sequelize.query('SELECT * FROM orders LEFT JOIN order_details ON order_details.order_id = orders.order_id  WHERE orders.user_id = ' + user_id + ' AND orders.order_id = ' + order_id)
             return data;
         } catch (error) {
             throw new BadRequestError(error.message);
