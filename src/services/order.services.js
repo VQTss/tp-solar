@@ -15,15 +15,14 @@ const OrderServices = {
                 order_total: order_total,
                 order_status: order_status,
             });
-            await order.save();
             if (!order) {
                 return "Cannot create order"
             } else {
                 let productInJSON =  JSON.parse(products);
-                console.log("========== productInJSON  ==========", productInJSON);
+                console.log("========== productInJSON  ==========", products);
                 const order_details = await OrderDetails.create({
                     order_id: order.order_id,
-                    products : productInJSON,
+                    products : products,
                     quantity,
                     phone,
                     email,
