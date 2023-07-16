@@ -38,17 +38,9 @@ const OrderServices = {
             return error;
         }
     },
-    updateOrder: async (order_details_id, order_total, order_status, products, name, phone, email, address) => {
+    updateOrder: async (user_id, order_total, order_status, products, name, phone, email, address , order_details_id, order_id) => {
 
         try {
-            const order_details = await OrderDetails.findOne({
-                where: {
-                    order_details_id: order_details_id,
-                },
-            })
-            if (!order_details) {
-                throw new Error('Cannot find order details');
-            } else {
                 const order = await Order.update({
                     order_total: order_total,
                     order_status: order_status,
@@ -58,7 +50,8 @@ const OrderServices = {
                     name: name,
                 }, {
                     where: {
-                        order_id: order_details.order_id,
+                        order_id: order_id,
+                        user_id: user_id,
                     },
                 });
                 if (!order) {
@@ -77,7 +70,6 @@ const OrderServices = {
                         return order_details;
                     }
                 }
-            }
         } catch (error) {
             throw new BadRequestError(error.message);
         }

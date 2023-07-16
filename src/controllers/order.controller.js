@@ -52,13 +52,13 @@ const OrderController = {
         }).send(res);
     },
     updateOrder: async (req, res, next) => {
-        const { order_id, order_total, order_status, products, name, phone, email, address } = req.body;
+        const { user_id, order_total, order_status, products, name, phone, email, address , order_details_id, order_id } = req.body;
 
-        // if (!user_id) {
-        //     return res.status(400).json({
-        //         message: "User id cannot be exist",
-        //     });
-        // }
+        if (!user_id) {
+            return res.status(400).json({
+                message: "User id cannot be exist",
+            });
+        }
         if (!order_total) {
             return res.status(400).json({
                 message: "Order total cannot be exist",
@@ -95,7 +95,7 @@ const OrderController = {
             });
         }
 
-        const order = await OrderServices.updateOrder(order_id, order_total, order_status, products, quantity, phone, email,);
+        const order = await OrderServices.updateOrder(user_id, order_total, order_status, products, name, phone, email, address , order_details_id, order_id);
         new SuccessResponse({
             metadata: order,
             message: "Update order successfully",
