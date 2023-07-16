@@ -18,6 +18,7 @@ const OrderServices = {
             if (!order) {
                 return new BadRequestError('Cannot create order');
             } else {
+                console.log("======== order ======== :" ,order);
                 const order_details = OrderDetails.create({
                     order_id: order.order_id,
                     product_id,

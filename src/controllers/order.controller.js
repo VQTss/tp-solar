@@ -97,7 +97,7 @@ const OrderController = {
 
         const order = OrderServices.updateOrder(order_id, order_total, order_status, product_id, quantity, phone, email,);
         new SuccessResponse({
-            order: order,
+            metadata: order,
             message: "Update order successfully",
         }).send(res);
     },
@@ -110,7 +110,7 @@ const OrderController = {
         }
         const order = OrderServices.deleteOrder(order_id);
         new SuccessResponse({
-            order: order,
+            metadata: order,
             message: "Delete order successfully",
         }).send(res);
     },
