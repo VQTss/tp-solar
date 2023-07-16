@@ -3,7 +3,7 @@ const OrderServices = require("../services/order.services");
 const { SuccessResponse } = require("../core/success.response");
 
 const OrderController = {
-    addOrder: (req, res, next) => {
+    addOrder: async (req, res, next) => {
         const { user_id, order_total, order_status, product_id, quantity, phone, email, address } = req.body;
         if (!user_id) {
             return res.status(400).json({
@@ -45,7 +45,7 @@ const OrderController = {
                 message: "Address cannot be exist",
             });
         }
-        const order = OrderServices.addOrder(user_id, order_total, order_status, product_id, quantity, phone, email, address);
+        const order = await OrderServices.addOrder(user_id, order_total, order_status, product_id, quantity, phone, email, address);
         new SuccessResponse({
             metadata: order,
             message: "Add order successfully",
