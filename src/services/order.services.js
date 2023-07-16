@@ -15,6 +15,7 @@ const OrderServices = {
                 order_status: order_status,
             });
             await order.save();
+            console.log("==========  order  ==========", order);
             if (!order) {
                 return "Cannot create order"
             } else {
@@ -26,6 +27,8 @@ const OrderServices = {
                     email,
                     address,
                 });
+                await order_details.save();
+                console.log("==========  order_details  ==========", order_details);
                 if (!order_details) {
                     return "Cannot create order details";
                 } else {
