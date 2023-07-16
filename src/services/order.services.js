@@ -67,7 +67,7 @@ const OrderServices = {
                     if (!order_details) {
                         throw new Error('Cannot update order details');
                     } else {
-                        return order_details;
+                        return order_details[0];
                     }
                 }
         } catch (error) {
@@ -122,7 +122,7 @@ const OrderServices = {
     },
     getOrderByUserId: async (user_id) => {
 
-        const data = await db.sequelize.query('SELECT * FROM orders LEFT JOIN order_details ON order_details.order_id = orders.order_id LEFT JOIN products ON products.product_id = order_details.product_id WHERE orders.user_id = ' + user_id)
+        const data = await db.sequelize.query('SELECT * FROM orders LEFT JOIN order_details ON order_details.order_id = orders.order_id  WHERE orders.user_id = ' + user_id)
         return data;
     },
     getOrderDetails: async (order_details_id) => {
