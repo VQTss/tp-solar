@@ -1,3 +1,5 @@
+const { DataTypes } = require("sequelize");
+
 module.exports = (sequelize, Sequelize) => {
     const OrderDetails = sequelize.define("order_details", {
         order_details_id: {
@@ -10,7 +12,7 @@ module.exports = (sequelize, Sequelize) => {
             allowNull: false
         },
         products: {
-            type: Sequelize.JSON,
+            type: DataTypes.JSON,
             allowNull: false
         },
         address : {
