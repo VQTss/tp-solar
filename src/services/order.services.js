@@ -38,7 +38,7 @@ const OrderServices = {
                 }
             }
         } catch (error) {
-            return error.message;
+            return error;
         }
     },
     updateOrder: async (order_details_id, order_total, order_status, products, quantity, phone, email, address) => {
