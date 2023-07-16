@@ -20,7 +20,7 @@ const OrderServices = {
             } else {
                 console.log("======== order ======== :" ,order);
                 const order_details = OrderDetails.create({
-                    order_id: order.order_id,
+                    order_id: order.dataValues.order_id,
                     product_id,
                     quantity,
                     phone,
