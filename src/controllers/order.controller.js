@@ -20,11 +20,11 @@ const OrderController = {
                 message: "Order status cannot be exist",
             });
         }
-        if (!product_id) {
-            return res.status(400).json({
-                message: "Product id cannot be exist",
-            });
-        }
+        // if (!product_id) {
+        //     return res.status(400).json({
+        //         message: "Product id cannot be exist",
+        //     });
+        // }
         if (!quantity) {
             return res.status(400).json({
                 message: "Quantity cannot be exist",
