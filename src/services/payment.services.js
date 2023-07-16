@@ -1,4 +1,5 @@
 
+const { where } = require('sequelize');
 const models = require('../../models/index');
 const { BadRequestError } = require('../core/error.response');
 const Payment = models.Payment;
@@ -9,12 +10,14 @@ const PaymentServices = {
         try {
             const order = await Order.update({
                 order_status: 'done',
-            }).where({
-                order_id: order_id,
-            }).save();
+            }, {
+                where: {
+                    order_id: order_id,
+                }
+            } )
             if (!order) {
                 return new BadRequestError('Cannot update order');
-            }else{
+            } else {
                 const payment = await Payment.create({
                     payment_method,
                     payment_status,
@@ -72,15 +75,17 @@ const PaymentServices = {
             return new Error(error.message);
         }
     },
-    paymentUpdateStatus : async (payment_id,payment_status, order_id, user_id) => {
+    paymentUpdateStatus: async (payment_id, payment_status, order_id, user_id) => {
         try {
             const payment = await Payment.update({
                 payment_status: payment_status,
-            }).where({
-                payment_id: payment_id,
-                order_id: order_id,
-                user_id: user_id,
-            }).save();
+            }, {
+                where: {
+                    payment_id: payment_id,
+                    order_id: order_id,
+                    user_id: user_id,
+                }
+            })
             return payment[0];
         } catch (error) {
             return new Error(error.message);
