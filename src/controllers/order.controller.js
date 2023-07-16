@@ -51,7 +51,7 @@ const OrderController = {
             message: "Add order successfully",
         }).send(res);
     },
-    updateOrder: (req, res, next) => {
+    updateOrder: async (req, res, next) => {
         const { order_id, order_total, order_status, product_id, quantity, phone, email, address } = req.body;
 
         if (!user_id) {
@@ -95,39 +95,39 @@ const OrderController = {
             });
         }
 
-        const order = OrderServices.updateOrder(order_id, order_total, order_status, product_id, quantity, phone, email,);
+        const order = await OrderServices.updateOrder(order_id, order_total, order_status, product_id, quantity, phone, email,);
         new SuccessResponse({
             metadata: order,
             message: "Update order successfully",
         }).send(res);
     },
-    deleteOrder: (req, res, next) => {
+    deleteOrder: async (req, res, next) => {
         const { order_id } = req.body;
         if (!order_id) {
             return res.status(400).json({
                 message: "Order id cannot be exist",
             });
         }
-        const order = OrderServices.deleteOrder(order_id);
+        const order = await OrderServices.deleteOrder(order_id);
         new SuccessResponse({
             metadata: order,
             message: "Delete order successfully",
         }).send(res);
     },
-    getOrder: (req, res, next) => {
+    getOrder: async (req, res, next) => {
         const { order_id } = req.body;
         if (!order_id) {
             return res.status(400).json({
                 message: "Order id cannot be exist",
             });
         }
-        const order = OrderServices.getOrder(order_id);
+        const order = await OrderServices.getOrder(order_id);
         new SuccessResponse({
             message: "Get order successfully",
             metadata: order
         }).send(res);
     },
-    getOrderAndUserID: (req, res, next) => {
+    getOrderAndUserID: async (req, res, next) => {
         const { order_id, user_id } = req.body;
 
         if (!order_id) {
@@ -140,20 +140,20 @@ const OrderController = {
                 message: "User id cannot be exist",
             });
         }
-        const order = OrderServices.getOrderAndUserID(order_id, user_id);
+        const order = await OrderServices.getOrderAndUserID(order_id, user_id);
         new SuccessResponse({
             message: "Get order and user id successfully",
             metadata: order
         }).send(res);
     },
-    getOrderDetails: (req, res, next) => {
+    getOrderDetails: async (req, res, next) => {
         const { order_details_id } = req.body;
         if (!order_details_id) {
             return res.status(400).json({
                 message: "Order details id cannot be exist",
             });
         }
-        const order = OrderServices.getOrderDetails(order_details_id);
+        const order = await OrderServices.getOrderDetails(order_details_id);
         new SuccessResponse({
             message: "Get order details successfully",
             metadata: order

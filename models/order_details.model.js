@@ -9,8 +9,8 @@ module.exports = (sequelize, Sequelize) => {
             type: Sequelize.INTEGER,
             allowNull: false
         },
-        product_id: {
-            type: Sequelize.STRING,
+        products: {
+            type: Sequelize.JSON,
             allowNull: false
         },
         address : {

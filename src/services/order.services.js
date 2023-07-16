@@ -5,8 +5,6 @@ const OrderDetails = models.order_details;
 const Product = models.product;
 const { BadRequestError } = require('../core/error.response');
 const db = require("../../models/index");
-const { or } = require('sequelize');
-
 
 const OrderServices = {
     addOrder: async (user_id, order_total, order_status, product_id, quantity, phone, email, address) => {
@@ -19,7 +17,6 @@ const OrderServices = {
             if (!order) {
                 return new BadRequestError('Cannot create order');
             } else {
-                console.log("======== order ======== :" ,order);
                 const order_details = await OrderDetails.create({
                     order_id: order.order_id,
                     product_id,
@@ -28,8 +25,6 @@ const OrderServices = {
                     email,
                     address,
                 });
-                await order_details.save();
-                console.log("======== order_details ======== :" ,order_details);
                 if (!order_details) {
                     return "Cannot create order details";
                 } else {
