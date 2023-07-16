@@ -39,7 +39,7 @@ const OrderServices = {
                     if (!cart) {
                         return "Cannot delete cart";
                     } else {
-                        return order_details[0];
+                        return order_details;
                     }
                 }
             }
