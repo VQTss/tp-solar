@@ -4,7 +4,7 @@ const { SuccessResponse } = require("../core/success.response");
 
 const OrderController = {
     addOrder: async (req, res, next) => {
-        const { user_id, order_total, order_status, products, quantity, phone, email, address } = req.body;
+        const { user_id, order_total, order_status, products, name, phone, email, address } = req.body;
         if (!user_id) {
             return res.status(400).json({
                 message: "User id cannot be exist",
@@ -25,7 +25,7 @@ const OrderController = {
                 message: "Product id cannot be exist",
             });
         }
-        if (!quantity) {
+        if (!name) {
             return res.status(400).json({
                 message: "Quantity cannot be exist",
             });
@@ -45,14 +45,14 @@ const OrderController = {
                 message: "Address cannot be exist",
             });
         }
-        const order = await OrderServices.addOrder(user_id, order_total, order_status, products, quantity, phone, email, address);
+        const order = await OrderServices.addOrder(user_id, order_total, order_status, products, name, phone, email, address);
         new SuccessResponse({
             metadata: order,
             message: "Add order successfully",
         }).send(res);
     },
     updateOrder: async (req, res, next) => {
-        const { order_id, order_total, order_status, products, quantity, phone, email, address } = req.body;
+        const { order_id, order_total, order_status, products, name, phone, email, address } = req.body;
 
         if (!user_id) {
             return res.status(400).json({
@@ -74,7 +74,7 @@ const OrderController = {
                 message: "Product id cannot be exist",
             });
         }
-        if (!quantity) {
+        if (!name) {
             return res.status(400).json({
                 message: "Quantity cannot be exist",
             });
@@ -95,7 +95,7 @@ const OrderController = {
             });
         }
 
-        const order = await OrderServices.updateOrder(order_id, order_total, order_status, products, quantity, phone, email,);
+        const order = await OrderServices.updateOrder(order_id, order_total, order_status, products, name, phone, email,);
         new SuccessResponse({
             metadata: order,
             message: "Update order successfully",

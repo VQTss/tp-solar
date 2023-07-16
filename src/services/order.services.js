@@ -7,13 +7,17 @@ const { BadRequestError } = require('../core/error.response');
 const db = require("../../models/index");
 
 const OrderServices = {
-    addOrder: async (user_id, order_total, order_status, products, quantity, phone, email, address) => {
-        
+    addOrder: async (user_id, order_total, order_status, products, name, phone, email, address) => {
+
         try {
             const order = await Order.create({
                 user_id: user_id,
                 order_total: order_total,
                 order_status: order_status,
+                phone: phone,
+                email: email,
+                address: address,
+                name: name,
             });
             await order.save();
             if (!order) {
@@ -21,11 +25,7 @@ const OrderServices = {
             } else {
                 const order_details = await OrderDetails.create({
                     order_id: order.order_id,
-                    products : products,
-                    quantity,
-                    phone,
-                    email,
-                    address,
+                    products: products,
                 });
                 await order_details.save();
                 if (!order_details) {
@@ -38,7 +38,7 @@ const OrderServices = {
             return error;
         }
     },
-    updateOrder: async (order_details_id, order_total, order_status, products, quantity, phone, email, address) => {
+    updateOrder: async (order_details_id, order_total, order_status, products, name, phone, email, address) => {
 
         try {
             const order_details = await OrderDetails.findOne({
@@ -52,6 +52,10 @@ const OrderServices = {
                 const order = await Order.update({
                     order_total: order_total,
                     order_status: order_status,
+                    phone: phone,
+                    email: email,
+                    address: address,
+                    name: name,
                 }, {
                     where: {
                         order_id: order_details.order_id,
@@ -61,11 +65,7 @@ const OrderServices = {
                     throw new Error('Cannot update order');
                 } else {
                     const order_details = await OrderDetails.update({
-                        products :products,
-                        quantity,
-                        phone,
-                        email,
-                        address,
+                        products: products,
                     }, {
                         where: {
                             order_details_id: order_details_id,
