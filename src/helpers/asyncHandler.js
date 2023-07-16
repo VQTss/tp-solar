@@ -1,8 +1,8 @@
 // middleware handle error
 const asynHandler = (func) => {
-    return (req, res, next) => {
-        func(req, res, next).catch(next);
-    }
+    return Promise
+        .resolve(func)
+        .catch((err) => next(err));
 }
 
 
