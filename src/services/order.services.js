@@ -5,6 +5,7 @@ const OrderDetails = models.order_details;
 const Product = models.product;
 const { BadRequestError } = require('../core/error.response');
 const db = require("../../models/index");
+const { or } = require('sequelize');
 
 
 const OrderServices = {
@@ -27,7 +28,8 @@ const OrderServices = {
                     email,
                     address,
                 });
-                console.log("======== order_details ======== :" ,order_details);
+                // console.log("======== order_details ======== :" ,order_details);
+                await order_details.save();
                 if (!order_details) {
                     return new BadRequestError('Cannot create order details');
                 } else {
