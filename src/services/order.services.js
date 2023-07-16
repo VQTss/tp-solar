@@ -8,6 +8,7 @@ const db = require("../../models/index");
 
 const OrderServices = {
     addOrder: async (user_id, order_total, order_status, products, quantity, phone, email, address) => {
+        
         try {
             const order = await Order.create({
                 user_id: user_id,
