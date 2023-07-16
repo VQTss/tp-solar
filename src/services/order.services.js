@@ -18,16 +18,16 @@ const OrderServices = {
             if (!order) {
                 return new BadRequestError('Cannot create order');
             } else {
-                // console.log("======== order ======== :" ,order);
+                console.log("======== order ======== :" ,order);
                 const order_details = await OrderDetails.create({
-                    order_id: order.dataValues.order_id,
+                    order_id: order.order_id,
                     product_id,
                     quantity,
                     phone,
                     email,
                     address,
                 });
-                // console.log("======== order_details ======== :" ,order_details);
+                console.log("======== order_details ======== :" ,order_details);
                 if (!order_details) {
                     return new BadRequestError('Cannot create order details');
                 } else {
