@@ -14,7 +14,7 @@ const PaymentServices = {
                 where: {
                     order_id: order_id,
                 }
-            } )
+            })
             if (!order) {
                 return new BadRequestError('Cannot update order');
             } else {
@@ -77,16 +77,40 @@ const PaymentServices = {
     },
     paymentUpdateStatus: async (payment_id, payment_status, order_id, user_id) => {
         try {
-            const payment = await Payment.update({
-                payment_status: payment_status,
-            }, {
-                where: {
-                    payment_id: payment_id,
-                    order_id: order_id,
-                    user_id: user_id,
+            let order_status = "";
+            if (payment_status == "done") {
+                order_status = "shipped";
+            }
+            if (payment_status == "fail") {
+                order_status = "fail";
+            }
+
+            if (order_status != "") {
+                const order = await Order.update({
+                    order_status: order_status,
+                }, {
+                    where: {
+                        order_id: order_id,
+                    }
+                })
+                if (!order) {
+                    return new BadRequestError('Cannot update order');
                 }
-            })
-            return payment[0];
+                const payment = await Payment.update({
+                    payment_status: payment_status,
+                }, {
+                    where: {
+                        payment_id: payment_id,
+                        order_id: order_id,
+                        user_id: user_id,
+                    }
+                })
+                return payment;
+            } else {
+                return new BadRequestError('Cannot update order');
+            }
+
+
         } catch (error) {
             return new Error(error.message);
         }
