@@ -8,6 +8,7 @@ const db = require("../../models/index");
 
 const OrderServices = {
     addOrder: async (user_id, order_total, order_status, products, quantity, phone, email, address) => {
+        console.log("========== productInJSON  ==========", products);
         
         try {
             const order = await Order.create({
@@ -19,7 +20,6 @@ const OrderServices = {
                 return "Cannot create order"
             } else {
                 let productInJSON =  JSON.parse(products);
-                console.log("========== productInJSON  ==========", products);
                 const order_details = await OrderDetails.create({
                     order_id: order.order_id,
                     products : products,
