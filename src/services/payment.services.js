@@ -13,20 +13,21 @@ const PaymentServices = {
                 order_id,
                 user_id,
             });
-            if (!payment) {
-                throw new BadRequestError('Cannot create payment');
-            } else {
-                const cart = await Cart.destroy({
-                    where: {
-                        user_id: user_id,
-                    }
-                });
-                if (!cart) {
-                    throw new BadRequestError('Cannot delete cart');
-                }else{
-                    return payment;
-                }
-            }
+            return payment
+            // if (!payment) {
+            //     return new BadRequestError('Cannot create payment');
+            // } else {
+            //     const cart = await Cart.destroy({
+            //         where: {
+            //             user_id: user_id,
+            //         }
+            //     });
+            //     if (!cart) {
+            //         return new BadRequestError('Cannot delete cart');
+            //     }else{
+            //         return payment;
+            //     }
+            // }
         } catch (error) {
             throw new Error(error.message);
         }
@@ -45,7 +46,7 @@ const PaymentServices = {
             }],
         });
         if (!payments) {
-            throw new Error('Cannot get all payments');
+            return new Error('Cannot get all payments');
         } else {
             return payments;
         }
@@ -68,12 +69,12 @@ const PaymentServices = {
                 }],
             });
             if (!payments) {
-                throw new Error('Cannot get payment by user id');
+                return new Error('Cannot get payment by user id');
             } else {
                 return payments;
             }
         } catch (error) {
-            throw new Error(error.message);
+            return new Error(error.message);
         }
     },
 };

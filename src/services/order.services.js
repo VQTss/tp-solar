@@ -5,7 +5,7 @@ const OrderDetails = models.order_details;
 const Product = models.product;
 const { BadRequestError } = require('../core/error.response');
 const db = require("../../models/index");
-
+const Cart = models.cart;
 const OrderServices = {
     addOrder: async (user_id, order_total, order_status, products, name, phone, email, address) => {
 
@@ -31,45 +31,54 @@ const OrderServices = {
                 if (!order_details) {
                     return "Cannot create order details";
                 } else {
-                    return order_details;
+                    const cart = await Cart.destroy({
+                        where: {
+                            user_id: user_id,
+                        }
+                    });
+                    if (!cart) {
+                        return "Cannot delete cart";
+                    } else {
+                        return order_details;
+                    }
                 }
             }
         } catch (error) {
             return error;
         }
     },
-    updateOrder: async (user_id, order_total, order_status, products, name, phone, email, address , order_details_id, order_id) => {
+    updateOrder: async (user_id, order_total, order_status, products, name, phone, email, address, order_details_id, order_id) => {
 
         try {
-                const order = await Order.update({
-                    order_total: order_total,
-                    order_status: order_status,
-                    phone: phone,
-                    email: email,
-                    address: address,
-                    name: name,
+            const order = await Order.update({
+                order_total: order_total,
+                order_status: order_status,
+                phone: phone,
+                email: email,
+                address: address,
+                name: name,
+            }, {
+                where: {
+                    order_id: order_id,
+                    user_id: user_id,
+                },
+            });
+            if (!order) {
+                throw new Error('Cannot update order');
+            } else {
+                const order_details = await OrderDetails.update({
+                    products: products,
                 }, {
                     where: {
-                        order_id: order_id,
-                        user_id: user_id,
+                        order_details_id: order_details_id,
                     },
                 });
-                if (!order) {
-                    throw new Error('Cannot update order');
+                if (!order_details) {
+                    throw new Error('Cannot update order details');
                 } else {
-                    const order_details = await OrderDetails.update({
-                        products: products,
-                    }, {
-                        where: {
-                            order_details_id: order_details_id,
-                        },
-                    });
-                    if (!order_details) {
-                        throw new Error('Cannot update order details');
-                    } else {
-                        return order_details[0];
-                    }
+                    return order_details[0];
                 }
+            }
         } catch (error) {
             throw new BadRequestError(error.message);
         }
