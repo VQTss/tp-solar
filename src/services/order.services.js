@@ -27,6 +27,7 @@ const OrderServices = {
                     email,
                     address,
                 });
+                console.log("======== order_details ======== :" ,order_details);
                 if (!order_details) {
                     return new BadRequestError('Cannot create order details');
                 } else {
