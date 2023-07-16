@@ -14,8 +14,9 @@ const OrderServices = {
                 order_total: order_total,
                 order_status: order_status,
             });
+            await order.save();
             if (!order) {
-                return new BadRequestError('Cannot create order');
+                return "Cannot create order"
             } else {
                 const order_details = await OrderDetails.create({
                     order_id: order.order_id,
