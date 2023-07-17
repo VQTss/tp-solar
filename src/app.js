@@ -12,7 +12,7 @@ const bodyParser = require('body-parser');
 
 // Cors
 app.use(cors({
-    origin: '*'
+    // origin: '*'
 }));
 
 
