@@ -16,7 +16,7 @@ db.sequelize.sync().then((result) => {
     // app.listen(PORT, () => {
     //     console.log(`Server listening on port ${PORT} and localhost:${PORT}`);
     // });
-    https.createServer(options, app).listen(5600);
+    https.createServer(options, app).listen(3000);
 }).catch((err) => {
     console.log(err);
 });
