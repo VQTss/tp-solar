@@ -7,6 +7,7 @@ const routers = require('./routes/index');
 const morgan = require('morgan');
 const cors = require('cors');
 const bodyParser = require('body-parser');
+const http = require('http');
 
 
 
@@ -29,6 +30,16 @@ app.use(morgan('dev'));
 app.use(morgan(':method :url :status :res[content-length] - :response-time ms'));
 
 // Routers
+
+app.use(function (req, res, next) {
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
+    res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
+    res.setHeader('Access-Control-Allow-Credentials', true);
+    next();
+});
+
+
 
 app.use(routers);
 
