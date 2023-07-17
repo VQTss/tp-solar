@@ -11,11 +11,11 @@ const bodyParser = require('body-parser');
 
 
 // Cors
-app.use(cors({
-    // origin: '*'
-}));
+// app.use(cors({
+//     // origin: '*'
+// }));
 
-
+app.use(cors());
 
 app.use(cookieParser());
 
