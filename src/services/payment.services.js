@@ -93,7 +93,6 @@ const PaymentServices = {
                         order_id: order_id,
                     }
                 })
-                console.log("====== orders ======", order);
                 if (!order) {
                     return new BadRequestError('Cannot update order');
                 }
