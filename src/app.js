@@ -11,7 +11,9 @@ const bodyParser = require('body-parser');
 
 
 // Cors
-app.use(cors());
+app.use(cors({
+    origin: '*'
+}));
 
 
 
