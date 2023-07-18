@@ -94,11 +94,6 @@ const productServices = {
                     product_id: product_id
                 }
             });
-            const deleteOrderDetail = await order_detail.destroy({
-                where: {
-                    product_id: product_id
-                }
-            });
             const deleteCart = await Cart.destroy({
                 where: {
                     product_id: product_id
